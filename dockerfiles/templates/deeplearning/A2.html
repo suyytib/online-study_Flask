@@ -1,0 +1,617 @@
+{% extends 'base.html' %} {% block title %} 医影智学网 {% endblock %} {% block
+head %}
+<!-- 定义主页背景色的CSS样式 -->
+<script src="../../static/js/waibu/layui.js"></script>
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/waibu/editormd.js"></script>
+<script src="../../static/js/waibu/layedit.js"></script>
+<script src="../../static/js/wangzhan/other.js"></script>
+<script src="../../static/build/ckeditor.js"></script>
+
+<link href="../../static/css/waibu/layui.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+{% endblock %} {% block body%}
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+    <div class="container">
+        <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学网!</a>
+        <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarsDefault" aria-expanded="false"
+            aria-controls="navbarsDefault">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">解剖学学习</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">医学图像处理案例</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">用户</a>
+                    <ul class="dropdown-menu" style="min-width: 22px;">
+                        <li>
+                            <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                        </li>
+                        <li>
+                            <a href="/admin" class="dropdown-item">后台</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <aside class="col-xs-3">
+        <h3 class="h3 text-white pt-3 pb-5">基于U-net的CT肿瘤图像分割</h1>
+            <div class="scroll-wrapper" style="position: relative;">
+                <div class="scroll-content"
+                    style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 430px;">
+                    <ul class="list-group" id="myTab" role="tablist">
+                        <li class="list-group-item" style="background-color:aqua;">
+                            <a class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">案例介绍</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact1"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">环境准备</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact2"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">加载包</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact3"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">设置模型保存环境</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact4"
+                                type="button" role="tab" aria-controls="contact"
+                                aria-selected="false">设置训练集和验证集的数据集并预处理</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact5"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">下载数据</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact6"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">构建Dataloader</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:cornflowerblue">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact7"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">构建模型，损失函数，优化器</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </aside>
+    <div style="height: 100px;"></div>
+    <div class="tab-content col-xs-7" id="myTabContent">
+        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>案例介绍</h1>
+                    <p style="font-size: large;">
+    肝细胞癌(Hepatocellular Carcinoma,HCC)是最常见的原发性肝癌类型。对于HCC的临床评估和治疗决策通常需要考虑肿瘤的体积和位置等。此外,计算机断层扫描(CT)在肝脏和肿瘤体积测量等方面具有优势，因此，在CT图像上进行精确的肿瘤分割至关重要。然而，手工勾画肿瘤区域费时费力，而且HCC肿瘤分割存在肿瘤大小、形状、位置和灰度差异大以及肿瘤边界模糊的问题，增加了肿瘤的分割难度。因此，探索HCC肿瘤的自动精准分割算法意义重大。
+    
+    任务:用算法实现在静脉期CT图像上对最大的HCC肿瘤区域进行分割。
+
+    分割要求：
+
+    尽可能准确地分割出肿瘤区域；
+    无肿瘤的CT影像，网络分割结果应为全黑；
+    评价指标为Dice系数；
+    
+                    </p>
+                </pre>
+            <!-- <div class="card-body">
+                <h4 class="h3 text-dark pt-3 pb-5">请输入一张CT图 如下：</h4>
+                <img src="/static/images/text.jpg" style="width: 350px;">
+                <form action="{{url_for('deeplearning.A2')}}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="pic"></label>
+                        <input type="file" name="pic" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="show(this)" />
+                    </div>
+                    <div id="display_none" style="position:absolute;left: 55%;"></div>
+                    <div id="testing" style="position:absolute; left: 50%;"></div>
+                    <button type="submit" class="btn btn-block btn-lg bg-white mt-4">
+                        开始
+                    </button>
+                    <div class="form-group">
+                        <p>{{ pic_error }}</p>
+                    </div>
+                    <a type="button" class="btn btn-block btn-lg bg-white mt-4" id="button"
+                        onclick="onlinetesting_testing()">
+                        查看
+                    </a>
+                </form>
+            </div> -->
+        </div>
+        <div class="tab-pane fade" id="contact1" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>环境准备</h1>
+                    <p style="font-size: large;">
+    配置tf2.0的运行环境；
+    
+                    </p>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>加载包</h1>
+                    <code>
+    import os  
+    # 导入os模块，用于操作文件和目录
+    
+    import numpy as np  
+    # 导入numpy模块，用于处理数组数据
+    
+    import SimpleITK as sitk  
+    # 导入SimpleITK模块，用于读取和写入医学影像文件，如DICOM和NIFTI
+    
+    import tensorflow as tf  
+    # 导入tensorflow模块，用于构建和训练深度学习模型
+    
+    from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, concatenate, Conv2DTranspose, Dropout, BatchNormalization, Activation  
+    # 从tensorflow.keras.layers导入构建模型所需的层
+    
+    from tensorflow.keras.models import Model  
+    # 从tensorflow.keras.models导入Model类，用于构建模型
+    
+    from keras.models import load_model  
+    # 导入Keras的load_model函数，用于加载训练好的模型
+
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>设置模型保存环境</h1>
+                    <code>
+    model.save('E:/unet_liver_segmentation.h5')
+    # 将训练好的模型保存到指定路径
+
+    print('succeed')
+    # 打印成功信息，表示模型训练和保存已完成
+    
+                        </code>
+                    </pre>
+        </div>
+        <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>设置训练集和验证集的数据集并预处理</h1>
+                        <code>
+    image_folder = '../liver_tumor_segmentation/imagesTr' 
+    # 替换为imageTr文件夹路径
+    # 指定包含训练图像的文件夹路径
+    
+    label_folder = '../liver_tumor_segmentation/labelsTr' 
+    # 替换为 labelTr文件夹路径
+    # 指定包含训练标签（分割结果）的文件夹路径
+    
+    images = load_nii_gz_files(image_folder)
+    # 使用load_nii_gz_files函数加载所有训练图像
+    
+    labels = load_nii_gz_files(label_folder)
+    # 使用load_nii_gz_files函数加载所有对应的标签图像
+    
+    images = np.array([img[int(img.shape[0] / 2)] for img in images])
+    # 从每个三维图像数据中提取中间的二维切片
+    
+    labels = np.array([lbl[int(lbl.shape[0] / 2)] for lbl in labels])
+    # 从每个三维标签数据中提取中间的二维切片
+    
+    images = images[..., np.newaxis]
+    # 为图像数据添加一个维度，使其成为一个单通道的三维数组
+    
+    labels = labels[..., np.newaxis]
+    # 为标签数据添加一个维度，使其成为一个单通道的三维数组
+    
+    split_idx = int(0.8 * len(images))
+    # 计算用于训练和验证的数据分割点
+    
+    x_train, x_val = images[:split_idx], images[split_idx:]
+    # 将图像数据分为训练集和验证集
+    
+    y_train, y_val = labels[:split_idx], labels[split_idx:]
+    # 将标签数据分为训练集和验证集
+
+    def resize_slice_sitk(image_array, target_width, target_height):
+    # 定义一个函数，接受一个图像数组、目标宽度和目标高度作为输入
+        
+        image_sitk = sitk.GetImageFromArray(image_array) 
+        # 将输入的 NumPy 数组转换为 SimpleITK 图像对象
+        
+        resample_filter = sitk.ResampleImageFilter() 
+        # 创建一个重采样过滤器对象，用于调整图像尺寸
+        
+        original_size = image_sitk.GetSize() 
+        # 获取原始 SimpleITK 图像的大小（三维）
+        
+        original_spacing = image_sitk.GetSpacing() 
+        # 获取原始 SimpleITK 图像的像素间距（通常是三维的）
+        
+        # 计算新像素间距，仅考虑 x 和 y 方向
+        new_spacing = [original_spacing[0] * (original_size[0] / target_width), 
+                    original_spacing[1] * (original_size[1] / target_height)]
+        
+        resample_filter.SetOutputSpacing(new_spacing + [original_spacing[-1]])
+        # 设置重采样后图像的输出像素间距
+        
+        resample_filter.SetSize([target_width, target_height, 1]) 
+        # 设置重采样后图像的输出尺寸，深度（z 轴）设置为 1，表示 2D 图像
+        
+        resample_filter.SetInterpolator(sitk.sitkLinear) 
+        # 设置插值方法为线性插值，用于在重采样过程中计算像素值
+        
+        # 执行重采样，调整图像尺寸
+        resized_slice = resample_filter.Execute(image_sitk)
+        
+        # 将重采样后的 SimpleITK 图像对象转换回 NumPy 数组
+        return sitk.GetArrayFromImage(resized_slice)
+                            
+                        </code>
+                    </pre>
+        </div>
+        <div class="tab-pane fade" id="contact5" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>下载数据</h1>
+                        <code>
+
+    数据集链接: <a href="https://github.com/LittleMount/UNet-for-tumor-segmentation/tree/master">https://github.com/LittleMount/UNet-for-tumor-segmentation/tree/master</a> 
+   
+                        </code>
+                    </pre>
+        </div>
+        <div class="tab-pane fade" id="contact6" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>构建Dataloader</h1>
+                        <code>
+    # 定义一个函数，用于加载文件夹内所有的.nii.gz格式的文件
+    def load_nii_gz_files(folder_path):
+        # 使用os.listdir获取指定文件夹内的所有文件和文件夹名称
+        file_names = sorted([f for f in os.listdir(folder_path) if f.endswith('.nii.gz')])
+        
+        # 初始化一个空列表，用于存储加载的影像数据
+        images = []  
+        
+        # 遍历文件名列表
+        for file in file_names:
+
+            print(f"Loading {file}...")  
+            # 打印正在加载的文件名
+            
+            try:
+                # 使用SimpleITK的ReadImage函数读取.nii.gz文件
+                # 然后使用GetArrayFromImage将影像数据转换为NumPy数组
+                image = sitk.GetArrayFromImage(sitk.ReadImage(os.path.join(folder_path, file)))
+                
+                # 将转换得到的NumPy数组添加到images列表中
+                images.append(image)
+            
+            except Exception as e:
+                # 如果在加载文件时发生异常，打印错误信息
+                print(f"Error loading {file}: {e}")
+        
+        # 返回包含所有影像数据NumPy数组的列表
+        return images
+    
+                        </code>
+                    </pre>
+        </div>
+        <div class="tab-pane fade" id="contact7" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                    <h1>构建模型，损失函数，优化器</h1>
+                    <code>
+    def conv2d_block(input_tensor, n_filters, kernel_size=3, batchnorm=True):
+    # 接收输入张量、过滤器数量、卷积核大小以及是否使用批量归一化的布尔值
+        
+        x = Conv2D(filters=n_filters, kernel_size=(kernel_size, kernel_size), 
+                    kernel_initializer='he_normal', padding='same')(input_tensor)
+        # 应用第一个卷积层，使用高斯误差反向传播初始化器，卷积核大小为kernel_size×kernel_size，填充方式为'same'，即保持输出特征图大小不变
+        
+        if batchnorm:
+            x = BatchNormalization()(x)
+        # 如果batchnorm为True，则在卷积层后添加批量归一化层
+        
+        x = Activation('relu')(x)
+        # 应用ReLU激活函数，它在正区间内线性激活，有助于引入非线性
+        
+        x = Conv2D(filters=n_filters, kernel_size=(kernel_size, kernel_size), 
+                    kernel_initializer='he_normal', padding='same')(x)
+        # 应用第二个卷积层，与第一个卷积层参数相同
+        
+        if batchnorm:
+            x = BatchNormalization()(x)
+        # 如果batchnorm为True，再次应用批量归一化层
+        
+        x = Activation('relu')(x)
+        # 再次应用ReLU激活函数
+        
+        return x
+        # 返回构建好的卷积块的输出张量
+
+    def get_unet(input_img, n_filters=16, dropout=0.1, batchnorm=True):
+    # 定义U-Net模型
+        c1 = conv2d_block(input_img, n_filters * 1, kernel_size=3, batchnorm=batchnorm)
+        # 第一个卷积块
+        
+        p1 = MaxPooling2D((2, 2))(c1)
+        # 池化层，减少特征图的尺寸，增加感受野
+        
+        p1 = Dropout(dropout)(p1)
+        # 引入dropout层以减少过拟合
+
+        # 重复以上过程，每次加倍过滤器数量并进行池化和dropout
+        c2 = conv2d_block(p1, n_filters * 2, kernel_size=3, batchnorm=batchnorm)
+        
+        p2 = MaxPooling2D((2, 2))(c2)
+        
+        p2 = Dropout(dropout)(p2)
+        
+        c3 = conv2d_block(p2, n_filters * 4, kernel_size=3, batchnorm=batchnorm)
+        
+        p3 = MaxPooling2D((2, 2))(c3)
+        
+        p3 = Dropout(dropout)(p3)
+        
+        c4 = conv2d_block(p3, n_filters * 8, kernel_size=3, batchnorm=batchnorm)
+        
+        p4 = MaxPooling2D((2, 2))(c4)
+        
+        p4 = Dropout(dropout)(p4)
+        
+        c5 = conv2d_block(p4, n_filters * 16, kernel_size=3, batchnorm=batchnorm)
+
+        # Expansive Path (解码器部分)
+        u6 = Conv2DTranspose(n_filters * 8, (3, 3), strides=(2, 2), padding='same')(c5)
+        
+        # 上采样/转置卷积层，用于增加特征图的尺寸
+        u6 = concatenate([u6, c4])
+        
+        # 将上采样的特征图与编码器对应层的特征图进行拼接
+        u6 = Dropout(dropout)(u6)
+        
+        c6 = conv2d_block(u6, n_filters * 8, kernel_size=3, batchnorm=batchnorm)
+        
+        # 重复以上解码器部分，每次减半过滤器数量，并进行上采样和dropout
+        u7 = Conv2DTranspose(n_filters * 4, (3, 3), strides=(2, 2), padding='same')(c6)
+        
+        u7 = concatenate([u7, c3])
+        
+        u7 = Dropout(dropout)(u7)
+        
+        c7 = conv2d_block(u7, n_filters * 4, kernel_size=3, batchnorm=batchnorm)
+        
+        u8 = Conv2DTranspose(n_filters * 2, (3, 3), strides=(2, 2), padding='same')(c7)
+        
+        u8 = concatenate([u8, c2])
+        
+        u8 = Dropout(dropout)(u8)
+        
+        c8 = conv2d_block(u8, n_filters * 2, kernel_size=3, batchnorm=batchnorm)
+        
+        u9 = Conv2DTranspose(n_filters * 1, (3, 3), strides=(2, 2), padding='same')(c8)
+        
+        u9 = concatenate([u9, c1])
+        
+        u9 = Dropout(dropout)(u9)
+        
+        c9 = conv2d_block(u9, n_filters * 1, kernel_size=3, batchnorm=batchnorm)
+
+        # 最后的1x1卷积层用于生成最终的分割图
+        outputs = Conv2D(1, (1, 1), activation='sigmoid')(c9)
+        
+        # 创建Keras模型，输入为原始输入图像，输出为分割结果
+        model = Model(inputs=[input_img], outputs=[outputs])
+        
+        return model  
+        # 返回创建的U-Net模型
+
+    input_img = Input((*images.shape[1:3], 1), name='img')
+    # 创建Keras模型的输入层，根据图像数据的形状定义输入尺寸
+    
+    model = get_unet(input_img, n_filters=16, dropout=0.05, batchnorm=True)
+    # 使用get_unet函数创建U-Net模型
+    
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    # 编译模型，使用Adam优化器，二元交叉熵损失函数，以及准确率作为评估指标
+    
+    model.summary()
+    # 打印模型的摘要信息，显示模型的层和参数数量
+
+    model.fit(x_train, y_train, batch_size=32, epochs=4, validation_data=(x_val, y_val))
+    # 训练模型，使用训练数据，批量大小为32，训练4个周期，并使用验证集进行性能验证
+
+    def dice_coefficient(true_mask, pred_mask):
+    # 定义一个函数来计算Dice系数
+
+        intersection = np.sum(true_mask * pred_mask)
+        # 计算真正例（TP）的数量
+
+        sum_ = np.sum(true_mask) + np.sum(pred_mask)
+        # 计算所有可能的正例（TP + FP + FN）的数量
+
+        return 2.0 * intersection / sum_ if sum_ != 0 else 1.0
+        # 计算Dice系数，如果分母为0则返回1
+    
+    dice_scores = [dice_coefficient(true.squeeze(), pred.squeeze()) for true, pred in zip(y_val, predictions_binary)]
+    # 对于每对真实标签和预测标签，计算Dice系数，并创建一个Dice系数的列表
+    
+    mean_dice = np.mean(dice_scores)
+    # 计算所有Dice系数的平均值
+    
+    print(f"Mean Dice Coefficient: {mean_dice}")
+    # 打印平均Dice系数，用于评估模型性能
+
+                    </code>
+                </pre>
+        </div>
+        <div style="height: 200px;"></div>
+        <div>
+            <fieldset class="layui-elem-field layui-field-title" style="background-color: aliceblue;">
+                <legend>发表评论  图片不大于100*200</legend>
+                <input type="hidden" id="tieba_id" name="tiebaId" value="2">
+                <textarea id="editor" lay-verify="content" class="layui-textarea" name="text"></textarea>
+                <button type="button" class="layui-btn comSub">提交评论</button>
+            </fieldset>
+            <hr style="margin-top: 30px; margin-bottom: 20px;">
+            <div style="text-align: center;">
+                <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                    aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#navbarsDefault1"
+                    aria-controls="navbarsDefault1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault1">
+                <ul class="comment">
+                    {% for com in comment|reverse %}
+                    <li class="bg-white mt-4" style="border: 1px solid black;">
+                        <p class="myText" style="max-height: 400px;overflow: scroll;">{{ com.text }}</p>
+                        <p>评论人：{{ com.user }} &nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ com.create_time }}</p>
+                    </li>
+                    {% else %}
+                    <li>期待你的评论</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let editor;
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            licenseKey: '',
+            language: 'en',
+        })
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    $(function () {
+        $(".myText").each(function () {
+            $(this).html($(this).text());
+        });
+    })
+    function insertStr(str, index, insertStr) {
+            return str.substring(0, index) + insertStr + str.substring(index)
+        }
+    layui.use(['form'], function () {
+        var form = layui.form;
+        $(".comSub").click(function () {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                //获取评论内容
+                var text = editor.getData();
+                var tiebaId = $("#tieba_id").val();
+                if (text == "" || text == undefined) {
+                    layer.msg("评论不能为空哦！", { icon: 0 });
+                } else {
+                    var temp = text.indexOf("<img style=");
+                        while (temp != -1) {
+                            text = insertStr(text, temp + 11, "height:200px;width:200px;");
+                            temp = text.indexOf("<img style=",temp+11);
+                        }
+                    $.post("/tieba/comment", { text: text, tiebaId: tiebaId }, function (result) {
+                        if (result.success) {
+                            window.location.href = '/deeplearning/A2';
+                        }
+                    })
+                }
+            });
+        })
+    });
+    function onlinetesting_testing() {
+        var rd = new FileReader();//创建文件读取对象
+        var files = '{{ picture }}';
+        if (files == 0)
+            alert("请输入图片");
+        else {
+            $("#testing").show();
+            $("#testing").html("<img src=\"data:image/png;base64," + files + "\" style=\"max-width:250px;max-height:250px;\"/>")
+        }
+    }
+</script>
+{% endblock %}

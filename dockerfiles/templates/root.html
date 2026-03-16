@@ -1,0 +1,375 @@
+{% extends 'base.html' %} {% block title %} 医影智学平台 {% endblock %} {% block
+head %}
+<!-- 定义主页背景色的CSS样式 -->
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/waibu/image-compare-viewer.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/waibu/particles.min.js"></script>
+<script src="../../static/js/wangzhan/other.js"></script>
+<script src="../../static/js/waibu/aos.js"></script>
+
+<link rel="stylesheet" href="../static/css/waibu/image-compare-viewer.min.css">
+<link href="//unpkg.com/layui@2.9.8/dist/css/layui.css" rel="stylesheet">
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+<link rel="stylesheet" href="../../static/css/waibu/aos.css" />
+{% endblock %} {% block body%}
+<div id="particles-js" style="z-index: 0;position:absolute;width: 100%;height: 730%"></div>
+<div style="background-attachment: fixed;width: 100%;background: url(/static/images/w6.jpg) no-repeat;background-size: 100% 100%;background-attachment: fixed;height: 100%;" data-aos-easing="ease"
+    data-aos-duration="2000" data-aos-delay="0">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+        <div class="container">
+            <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学平台!</a>
+            <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarsDefault" aria-expanded="false"
+                aria-controls="navbarsDefault">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search"
+                        aria-label="Search">
+                    <button class="btn btn-sm btn-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                {% for result in results %}
+                <p>{{ result.title }}</p>
+                <p>{{ result.content }}</p>
+                {% endfor %}
+                <ul class="navbar-nav ml-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a href="{{url_for('aichart.aichart')}}" class="nav-link">AI 问答</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">解剖学学习</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">医学图像处理案例</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">用户</a>
+                        <ul class="dropdown-menu" style="min-width: 22px;">
+                            <li>
+                                <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                            </li>
+                            <li>
+                                <a href="/admin" class="dropdown-item">后台</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="max-width: 1000px">
+        <section class="pt-4 pb-3  aos-init" data-aos="fade-up">
+            <h1 class="text-white pt-3 pb-5"><strong>一站式解决您的需求，让学习更轻松</strong></h1>
+        </section>
+        <section class="pb-5 aos-init" data-aos="fade-up">
+            <div id="carouselExampleInterval" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1" style="color: aliceblue;"></button>
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="1"
+                        aria-label="Slide 2" style="color: aliceblue;"></button>
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="2"
+                        aria-label="Slide 3" style="color: aliceblue;"></button>
+                    <button type="button" data-bs-target="#carouselExampleInterval" data-bs-slide-to="3"
+                        aria-label="Slide 4" style="color: aliceblue;"></button>
+                </div>
+                <div class="carousel-inner" data-aos="fade-up">
+                    <div class="carousel-item active" data-bs-interval="10000">
+                        <img src="/static/images/w7.jpg" class="d-block w-100 h-100" alt="..."
+                            style=" border-radius: 8px;" />
+                    </div>
+                    <div class="carousel-item" data-bs-interval="10000">
+                        <img src="/static/images/w8.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+                    </div>
+                    <div class="carousel-item" data-bs-interval="10000">
+                        <img src="/static/images/w9.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+                    </div>
+                    <div class="carousel-item" data-bs-interval="10000">
+                        <img src="/static/images/w10.png" class="d-block w-100" alt="..."
+                            style=" border-radius: 8px;" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div style="height: 100px;"></div>
+        <section class="pt-4 pb-4  aos-init" data-aos="fade-up">
+            <h1 class="text-white pt-3 pb-5">夯基础 <strong>医学图像知识</strong> &amp; <strong>医学3D模型</strong></h1>
+            <h1 class="heading h3 text-white pt-3 pb-5">开启智慧医学之旅，让学习更高效、更便捷</h1>
+        </section>
+        <div style="height: 50px;"></div>
+        <div class="container" style="max-height: 500px;">
+            <section class="pt-5 pb-5 aos-init" data-aos="fade-right"
+                style="position:absolute;left:8%;right: 52%;max-width: 550px;">
+                <img src="/static/images/q5.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+            </section>
+            <section class="pt-5 pb-5 aos-init" data-aos="fade-left"
+                style="position:absolute;left:52%;right: 8%;max-width: 550px;">
+                <img src="/static/images/q7.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+            </section>
+        </div>
+        <div style="height: 700px;"></div>
+        <section class="pt-4 pb-4  aos-init" data-aos="fade-up">
+            <h1 class="text-white pt-3 pb-5">促提升 <strong>图像处理案例</strong> &amp; <strong>在线测验</strong></h1>
+            <h1 class="heading h3 text-white pt-3 pb-5">从基础到实践，医影智学Tool为您构建医学知识桥梁</h1>
+        </section>
+        <div style="height: 50px;"></div>
+        <div class="container">
+            <section class="pt-5 pb-5 aos-init" data-aos="flip-up"
+                style="position:absolute;left:8%;right: 52%;max-width: 550px;">
+                <img src="/static/images/q6.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+            </section>
+            <section class="pt-5 pb-5 aos-init" data-aos="flip-down"
+                style="position:absolute;left: 52%;right: 8%;max-width: 550px;">
+                <img src="/static/images/q10.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+            </section>
+        </div>
+        <div style="height: 700px;"></div>
+        <section class="pt-4 pb-4  aos-init" data-aos="fade-up">
+            <h1 class="text-white pt-3 pb-5">重交互 <strong>个人博客</strong> &amp; <strong>模型应用</strong></h1>
+            <h1 class="heading h3 text-white pt-3 pb-5">实时反馈，高效学习，医影智学Tool让医学教育更智能</h1>
+        </section>
+        <div style="height: 50px;"></div>
+        <div class="container">
+            <section class="pt-5 pb-5 aos-init" data-aos="zoom-out-down"
+                style="position:absolute;left:8%;right: 52%;max-width: 550px;">
+                <img src="/static/images/q11.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+            </section>
+            <section class="pt-5 pb-5 aos-init" data-aos="zoom-out-down"
+                style="position:absolute;left: 52%;right: 8%;max-width: 550px;">
+                <img src="/static/images/q9.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+            </section>
+        </div>
+        <div style="height: 650px;"></div>
+        <div class="container">
+            <section class="pt-5 pb-5 aos-init" data-aos="fade-down-right"
+                style="position:absolute;left:15%;right: 60%;max-width: 350px;">
+                <img src="/static/images/q1.png" class="d-block w-100" alt="..." style=" border-radius: 8px;" />
+                <h1 class="text-white pt-3 pb-5">整体</h1>
+            </section>
+            <section class="pt-5 pb-5 aos-init" data-aos="fade-down-left"
+                style="position:absolute;right: 15%;left:60%; max-width: 350px;">
+                <div id="image-compare2" >
+                    <img src="/static/images/q1.png">
+                    <img src="/static/images/q2.png">
+                </div>
+                <h1 class="text-white pt-3 pb-5">脂肪</h1>
+            </section>
+        </div>
+        <div style="height: 600px;"></div>
+        <div class="container">
+            <section class="pt-5 pb-5 aos-init" data-aos="fade-up-right"
+                style="position:absolute;left:15%;right: 60%;max-width: 350px;">
+                <div id="image-compare1" >
+                    <img src="/static/images/q1.png">
+                    <img src="/static/images/q3.png">
+                </div>
+                <h1 class="text-white pt-3 pb-5">骨骼</h1>
+            </section>
+            <section class="pt-5 pb-5 aos-init" data-aos="fade-up-left"
+                style="position:absolute;right: 15%;left:60%; max-width: 350px;">
+                <div id="image-compare" >
+                    <img src="/static/images/q1.png">
+                    <img src="/static/images/q4.png">
+                </div>
+                <h1 class="text-white pt-3 pb-5">内脏</h1>
+            </section>
+        </div>
+        <div style="height: 850px;"></div>
+        <section class="pt-4 pb-4  aos-init" data-aos="fade-up">
+            <h1 class="heading h3 text-white pt-3 pb-5">探索医学无限可能，医影智学Tool与您一同前行</h1>
+        </section>
+        <div style="height: 300px;"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    AOS.init();
+    const element = document.getElementById("image-compare");
+    const viewer = new ImageCompare(element).mount();
+    const element1 = document.getElementById("image-compare1");
+    const viewer1 = new ImageCompare(element1).mount();
+    const element2 = document.getElementById("image-compare2");
+    const viewer2 = new ImageCompare(element2).mount();
+    particlesJS("particles-js", {
+        // 粒子的基本配置
+        particles: {
+            number: {
+                value: 80,  // 粒子数量
+                density: {
+                    enable: true,
+                    value_area: 800,  // 粒子分布密度
+                },
+            },
+            color: {
+                value: "#ffffff",  // 粒子颜色
+            },
+            shape: {
+                type: "circle",  // 粒子形状，支持 circle（圆形）等
+                stroke: {
+                    width: 0,
+                    color: "#000000",
+                },
+                polygon: {
+                    nb_sides: 5,
+                },
+            },
+            opacity: {
+                value: 0.5,  // 粒子透明度
+                random: false,
+                anim: {
+                    enable: false,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false,
+                },
+            },
+            size: {
+                value: 3,  // 粒子大小
+                random: true,
+                anim: {
+                    enable: false,
+                    speed: 40,
+                    size_min: 0.1,
+                    sync: false,
+                },
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,  // 粒子间连线的距离
+                color: "#ffffff",  // 粒子间连线的颜色
+                opacity: 0.4,  // 粒子间连线的透明度
+                width: 1,  // 粒子间连线的宽度
+            },
+            move: {
+                enable: true,
+                speed: 6,  // 粒子运动速度
+                direction: "none",
+                random: false,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: {
+                    enable: false,
+                    rotateX: 600,
+                    rotateY: 1200,
+                },
+            },
+        },
+        // 交互性的配置
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "repulse",  // 鼠标悬停效果
+                },
+                onclick: {
+                    enable: true,
+                    mode: "push",  // 鼠标点击效果
+                },
+                resize: true,
+            },
+            modes: {
+                grab: {
+                    distance: 400,
+                    line_linked: {
+                        opacity: 1,
+                    },
+                },
+                bubble: {
+                    distance: 400,
+                    size: 40,
+                    duration: 2,
+                    opacity: 8,
+                    speed: 3,
+                },
+                repulse: {
+                    distance: 200,
+                    duration: 0.4,
+                },
+                push: {
+                    particles_nb: 0,
+                },
+                remove: {
+                    particles_nb: 2,
+                },
+            },
+        },
+        retina_detect: true,
+    });
+</script>
+{% endblock %}

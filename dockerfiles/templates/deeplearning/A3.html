@@ -1,0 +1,409 @@
+{% extends 'base.html' %}
+
+{% block title %}
+医影智学网
+{% endblock %}
+
+
+{% block head %}
+<!-- 加载注册用的js代码 -->
+<script src="../../static/js/waibu/layui.js"></script>
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/waibu/editormd.js"></script>
+<script src="../../static/js/waibu/layedit.js"></script>
+<script src="../../static/js/wangzhan/other.js"></script>
+<script src="../../static/build/ckeditor.js"></script>
+
+<link href="../../static/css/waibu/layui.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+{% endblock %}
+
+{% block body%}
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+    <div class="container">
+        <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学网!</a>
+        <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarsDefault" aria-expanded="false"
+            aria-controls="navbarsDefault">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">解剖学学习</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">医学图像处理案例</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">用户</a>
+                    <ul class="dropdown-menu" style="min-width: 22px;">
+                        <li>
+                            <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                        </li>
+                        <li>
+                            <a href="/admin" class="dropdown-item">后台</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <aside class="col-xs-3">
+        <h3 class="h3 text-white pt-3 pb-5">深度学习经典入门项目—手写数字识别</h3>
+        <div class="scroll-wrapper" style="position: relative;">
+            <div class="scroll-content" style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 430px;">
+                <ul class="list-group" id="myTab" role="tablist">
+                    <li class="list-group-item" style="background-color:aqua;">
+                        <a class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">案例介绍</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact1"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">环境准备</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact2"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">加载包</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact3"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">设置模型保存环境</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact4"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">设置训练集和验证集的数据集并预处理</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact5"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">下载数据</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact6"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">构建模型，损失函数，优化器</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact7"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">训练模型</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div style="height: 100px;"></div>
+    <div class="tab-content col-xs-7" id="myTabContent">
+        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>案例介绍</h1>
+                <p style="font-size: large;">
+    手写数字识别解决了邮政系统邮政编码识别的问题。手写数字识别常用的数据集是 mnist，该数据集是入门机器学习、深度学习 经典的数据集。
+
+    （1）采用用全连接神经网络训练
+
+    全连接神经网络模型是一种多层感知机(MLP)，感知机的原理是寻找类别间最合理、最具有鲁棒性的超平面，感知机最具代表的是SVM支持向量机算法。
+
+    （2）反向传播
+
+    反向传播根据前向传播产生的损失函数值，沿输出端向至输入端优化每层之间参数，在此过程中运算利用梯度下降法优化参数，神经网络求解参数本质上仍然是规划中求最优解问题。
+
+    （3）训练mnist手写数字识别
+
+    利用交叉熵作为损失函数实现对minist数据集的识别，minist数据集是手写数字的图像样本，DNN识别图像的过程就是把图像正确的归为0-9这10个数字，所以这是一个分类算法的实现。
+
+    任务输入：一系列手写数字图片，其中每张图片都是28x28的像素矩阵。
+    
+    任务输出：经过了大小归一化和居中处理，输出对应的0~9的数字标签。
+
+                </p>
+            </pre>
+            <div class="card-body">
+                <h4 class="h3 text-dark pt-3 pb-5">请输入一张28*28大小的图片 如下：</h4>
+                <img src="/static/images/shuzi4.jpg">
+                <form action="{{url_for('deeplearning.A3')}}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="pic"></label>
+                        <input type="file" name="pic" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="show(this)" />
+                    </div>
+                    <div id="display_none"></div>
+                    <button type="submit" class="btn btn-block btn-lg bg-white mt-4">
+                        开始
+                    </button>
+                    <div class="form-group">
+                        <p>{{ pic_error }}</p>
+                    </div>
+                    <h4 class="h3 text-dark pt-3 pb-5">预测结果为：{{ y_pred }}</h4>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact1" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>环境准备</h1>
+                <p style="font-size: large;">
+    需要以下资源
+    Python 3.8
+
+    TensorFlow 2,3
+
+    numpy
+
+    matplotlib
+
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>加载包</h1>
+                <code>
+    import tensorflow as tf
+
+    import numpy as np
+
+    import matplotlib.pyplot as plt
+
+                </code>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>设置模型保存环境</h1>
+                <code>
+    with open('my_model.pkl', 'wb') as f:
+        pickle.dump(model, f)
+
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>设置训练集和验证集的数据集并预处理</h1>
+                    <code>
+    #从Keras中导入MNIST数据集
+    mnist=tf.keras.datasets.mnist
+                  
+    #划分数据
+    (x_train,y_train),(x_test,y_test)=mnist.load_data()
+                
+    #对特征值x_train和x_test进行标准化处理,使其取值范围为0~1
+    x_train,x_test=x_train/255.0,x_test/255.0
+                        
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact5" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>下载数据</h1>
+                    <code>
+    MNIST 数据集来自美国国家标准与技术研究所, National Institute of Standards and Technology (NIST). 训练集 (training set) 由来自 250 个不同人手写的数字构成, 其中 50% 是高中学生, 50% 来自人口普查局 (the Census Bureau) 的工作人员. 测试集(test set) 也是同样比例的手写数字数据.
+
+
+    MNIST数据集的发布，吸引了大量科学家训练模型。1998年，LeCun分别用单层线性分类器、多层感知器（Multilayer Perceptron, MLP）和多层卷积神经网络LeNet进行实验，使得测试集的误差不断下降（从12%下降到0.7%）。在研究过程中，LeCun提出了卷积神经网络（Convolutional Neural Network，CNN），大幅度地提高了手写字符的识别能力，也因此成为了深度学习领域的奠基人之一。
+
+    链接: <a href="https://pan.baidu.com/s/1vIFn2VNGtMpQpRFuewhr9A">https://pan.baidu.com/s/1vIFn2VNGtMpQpRFuewhr9A</a> 
+    提取码: q4pt
+    
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact6" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>构建模型，损失函数，优化器</h1>
+                <code>
+    #构建空的顺序网络模型
+    model=tf.keras.models.Sequential()
+
+    #为网络模型添加输入层,将数据平展为一维数组 
+    model.add(tf.keras.layers.Flatten(input_shape=(28,28)))
+
+    #为网络模型添加隐藏层,结点个数为128,使用ReLU函数作为激活函数
+    model.add(tf.keras.layers.Dense(128,activation='relu'))
+
+    #为网络模型添加输出层,结点个数为10,使用Softmax函数作为激活函数
+    model.add(tf.keras.layers.Dense(10,activation='softmax'))
+
+    #使用summary()函数显示网络模型各层的参数信息
+    model.summary()
+
+    #编译顺序网络模型
+    model.compile(loss='sparse_categorical_crossentropy',
+
+        optimizer='adam' , metrics=[ 'sparse_categorical_accuracy'])
+                         
+    原文链接：<a href="https://blog.csdn.net/jiangguangchao/article/details/111314550">https://blog.csdn.net/jiangguangchao/article/details/111314550</a>
+
+                </code>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact7" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <code>
+                <h1>训练模型与评估模型</h1>
+    #训练顺序网络模型,其中,设置批量大小为32,迭代次数为5
+    model.fit(x_train,y_train,batch_size=32,epochs=5)
+
+    #使用测试数据集对顺序网络模型进行评估,其中,设置批量大小为32,日志显示模式为2
+    model.evaluate(x_test,y_test,batch_size=32,verbose=2)
+                </code>
+            </pre>
+        </div>
+        <div style="height: 200px;"></div>
+        <div>
+            <fieldset class="layui-elem-field layui-field-title" style="background-color: aliceblue;">
+                <legend>发表评论</legend>
+                <input type="hidden" id="tieba_id" name="tiebaId" value="3">
+                <textarea id="editor" lay-verify="content" class="layui-textarea" name="text"></textarea>
+                <button type="button" class="layui-btn comSub">提交评论</button>
+            </fieldset>
+            <hr style="margin-top: 30px; margin-bottom: 20px;">
+            <div style="text-align: center;">
+                <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                    aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#navbarsDefault1"
+                    aria-controls="navbarsDefault1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault1">
+                <ul class="comment">
+                    {% for com in comment |reverse%}
+                    <li class="bg-white mt-4" style="border: 1px solid black;">
+                        <p class="myText">{{ com.text }}</p>
+                        <p>评论人：{{ com.user }} &nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ com.create_time }}</p>
+                    </li>
+                    {% else %}
+                    <li>期待你的评论</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let editor;
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            licenseKey: '',
+            language: 'en',
+        })
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    $(function () {
+        $(".myText").each(function () {
+            $(this).html($(this).text());
+        });
+    })
+    function insertStr(str, index, insertStr) {
+            return str.substring(0, index) + insertStr + str.substring(index)
+        }
+    layui.use(['form'], function () {
+        var form = layui.form;
+        $(".comSub").click(function () {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                //获取评论内容
+                var text = editor.getData();
+                var tiebaId = $("#tieba_id").val();
+                if (text == "" || text == undefined) {
+                    layer.msg("评论不能为空哦！", { icon: 0 });
+                } else {
+                    var temp = text.indexOf("<img style=");
+                        while (temp != -1) {
+                            text = insertStr(text, temp + 11, "height:200px;width:200px;");
+                            temp = text.indexOf("<img style=",temp+11);
+                        }
+                    $.post("/tieba/comment", { text: text, tiebaId: tiebaId }, function (result) {
+                        if (result.success) {
+                            window.location.href = '/deeplearning/A3';
+                        }
+                    })
+                }
+            });
+        })
+    });
+</script>
+{% endblock %}

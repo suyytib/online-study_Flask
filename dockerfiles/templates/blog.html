@@ -1,0 +1,213 @@
+{% extends 'base.html' %} {% block title %} 医影智学平台 {% endblock %} {% block
+head %}
+<!-- 定义主页背景色的CSS样式 -->
+<script src="../../static/js/waibu/layui.js"></script>
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/waibu/editormd.js"></script>
+<script src="../../static/js/waibu/layedit.js"></script>
+<script src="../../static/js/wangzhan/other.js"></script>
+<script src="../../static/build/ckeditor.js"></script>
+
+<link href="../../static/css/waibu/layui.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+{% endblock %} {% block body%}
+<div style="background-attachment: fixed;width: 100%;background: url(/static/images/w6.jpg) no-repeat;background-size: 100% 100%;background-attachment: fixed;height: 100%;" data-aos-easing="ease"
+    data-aos-duration="2000" data-aos-delay="0">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+        <div class="container">
+            <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学平台!</a>
+            <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarsDefault" aria-expanded="false"
+                aria-controls="navbarsDefault">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+                <ul class="navbar-nav ml-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">解剖学学习</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">医学图像处理案例</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">用户</a>
+                        <ul class="dropdown-menu" style="min-width: 22px;">
+                            <li>
+                                <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                            </li>
+                            <li>
+                                <a href="/admin" class="dropdown-item">后台</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container pt-7 pb-5" style="width: 70%;">
+        <div style="height: 100px;"></div>
+        <div class="onlinetest justify-content-center">
+            <div class="alert alert-success" role="alert" type="button" style="width: 100%;">
+                <h4 class="alert-heading">{{ blog.title }}</h4>
+                <hr>
+                <p class="myText" readonly>{{ blog.text }}</p>
+                <div style="height: 100px;"></div>
+                <p>作者：{{ blog.user }} &nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ blog.create_time }}</p>
+            </div>
+            <div style="height: 100px;"></div>
+            <fieldset class="layui-elem-field layui-field-title" style="background-color: aliceblue;">
+                <legend>发表评论</legend>
+                <input type="hidden" id="tieba_id" name="tiebaId" value="{{blog.id+10000}}">
+                <textarea id="editor" lay-verify="content" class="layui-textarea" name="text"></textarea>
+                <button type="button" class="layui-btn comSub">提交评论</button>
+            </fieldset>
+            <hr style="margin-top: 30px; margin-bottom: 20px;">
+            <div style="text-align: center;">
+                <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                    aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#navbarsDefault1"
+                    aria-controls="navbarsDefault1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault1">
+                <ul class="comment">
+                    {% for com in comment |reverse%}
+                    <li class="bg-white mt-4" style="border: 1px solid black;">
+                        <p class="myText">{{ com.text }}</p>
+                        <p>评论人：{{ com.user }} &nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ com.create_time }}</p>
+                    </li>
+                    {% else %}
+                    <li>期待你的评论</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+    <script>
+        let editor;
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                licenseKey: '',
+                language: 'en',
+            })
+            .then(newEditor => {
+                editor = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        $(function () {
+            $(".myText").each(function () {
+                $(this).html($(this).text());
+            });
+        })
+        function insertStr(str, index, insertStr) {
+            return str.substring(0, index) + insertStr + str.substring(index)
+        }
+        layui.use(['form'], function () {
+            var form = layui.form;
+            $(".comSub").click(function () {
+                layui.use('layer', function () {
+                    var layer = layui.layer;
+                    //获取评论内容
+                    var text = editor.getData();
+                    var tiebaId = $("#tieba_id").val();
+                    if (text == "" || text == undefined) {
+                        layer.msg("评论不能为空哦！", { icon: 0 });
+                    } else {
+                        var temp = text.indexOf("<img style=");
+                        while (temp != -1) {
+                            text = insertStr(text, temp + 11, "height:200px;width:200px;");
+                            temp = text.indexOf("<img style=",temp+11);
+                        }
+                        $.post("/tieba/comment", { text: text, tiebaId: tiebaId }, function (result) {
+                            if (result.success) {
+                                window.history.go(-1);
+                                window.location.reload();
+                            }
+                        })
+                    }
+                });
+            })
+        });
+    </script>
+    {% endblock %}

@@ -1,0 +1,162 @@
+{% extends 'base.html' %} {% block title %} 医影智学平台 {% endblock %} {% block
+head %}
+<!-- 定义主页背景色的CSS样式 -->
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/wangzhan/other.js"></script>
+
+<link href="//unpkg.com/layui@2.9.8/dist/css/layui.css" rel="stylesheet">
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+{% endblock %} {% block body%}
+<div style="background-attachment: fixed;width: 100%;background: url(/static/images/w6.jpg) no-repeat;background-size: 100% 100%;background-attachment: fixed;height: 100%;" data-aos-easing="ease"
+    data-aos-duration="2000" data-aos-delay="0">
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+        <div class="container">
+            <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学平台!</a>
+            <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarsDefault" aria-expanded="false"
+                aria-controls="navbarsDefault">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+                <ul class="navbar-nav ml-auto align-items-lg-center">
+                    <li class="nav-item">
+                        <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">解剖学学习</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">医学图像处理案例</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item"
+                                    href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                            aria-expanded="false">用户</a>
+                        <ul class="dropdown-menu" style="min-width: 22px;">
+                            <li>
+                                <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                            </li>
+                            <li>
+                                <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                            </li>
+                            <li>
+                                <a href="/admin" class="dropdown-item">后台</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container pt-7 pb-5" style="width: 70%;">
+        <div style="height: 100px;"></div>
+        <div class="onlinetest justify-content-center">
+            <h4 class="h3 text-dark pt-3 pb-5">水平测试</h4>
+            <form action="{{url_for('onlinetesting.testing')}}" method="post">
+                <div class="form-group">
+                    <label>问题：</label>
+                    <input type="text" readonly class="form-control" value="{{ questions }}">
+                </div>
+                <div class="form-group">
+                    <label>答案:</label>
+                    <input type="text" name="answers" class="form-control" value="{{ answers }}">
+                </div>
+                <div class="form-group" id="testing" style="visibility: hidden;">
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading">正确答案</h4>
+                        <hr>
+                        <p type="text" readonly class="mb-0">{{ true_answers }}</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block btn-lg bg-white mt-4">刷新
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                            <path
+                                d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+                            <path fill-rule="evenodd"
+                                d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z" />
+                        </svg>
+                    </button>
+                    <a onclick="onlinetesting();" id="buttonc" type="button"
+                        class="btn btn-block btn-lg bg-white mt-4">检查
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-search" viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </a>
+                </div>
+            </form>
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+    <div style="height: 100px;"></div>
+</div>
+{% endblock %}

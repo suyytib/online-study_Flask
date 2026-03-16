@@ -1,0 +1,810 @@
+{% extends 'base.html' %} {% block title %} 医影智学网 {% endblock %} {% block
+head %}
+<!-- 定义主页背景色的CSS样式 -->
+<script src="../../static/js/waibu/layui.js"></script>
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/waibu/editormd.js"></script>
+<script src="../../static/js/waibu/layedit.js"></script>
+<script src="../../static/js/wangzhan/other.js"></script>
+<script src="../../static/build/ckeditor.js"></script>
+
+<link href="../../static/css/waibu/layui.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+{% endblock %} {% block body%}
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+    <div class="container">
+        <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学网!</a>
+        <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarsDefault" aria-expanded="false" aria-controls="navbarsDefault">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">解剖学学习</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">医学图像处理案例</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">用户</a>
+                    <ul class="dropdown-menu" style="min-width: 22px;">
+                        <li>
+                            <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                        </li>
+                        <li>
+                            <a href="/admin" class="dropdown-item">后台</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <aside class="col-xs-3">
+        <h3 class="h3 text-white pt-3 pb-5">使用Tansformer分割三维腹部多器官</h3>
+        <div class="scroll-wrapper" style="position:relative;">
+            <div class="scroll-content" style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 430px;">
+                <ul class="list-group" id="myTab" role="tablist">
+                    <li class="list-group-item" style="background-color:aqua;">
+                        <a class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">案例介绍</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact1"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">环境准备</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact2"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">加载包</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact3"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">设置模型保存环境</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact4"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">设置训练集和验证集的数据集并预处理</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact5"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">下载数据</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact6"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">构建Dataloader</a>
+                    </li>
+                    <li class="list-group-item" style="background-color:cornflowerblue">
+                        <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact7"
+                            type="button" role="tab" aria-controls="contact" aria-selected="false">构建模型，损失函数，优化器</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div style="height: 100px;"></div>
+    <div class="tab-content col-xs-7" id="myTabContent">
+        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 10%;">10%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="10" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 10%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>案例介绍</h1>
+                <p style="font-size: large;">
+    利用纯Transformers作为编码器来学习输入量的序列表示并有效地捕获全局多尺度信息。同时也遵循了编码器和解码器的成功的“U型”网络设计。Transformers编码器通过不同分辨率的跳跃连接直接连接到解码器，以得到最终的分割结果。
+
+    使用多器官分割的BTCV数据集、医学分割十项全能（MSD）数据集广泛验证了提出的模型在不同成像方式（即MR和CT）上对体积脑肿瘤和脾脏分割任务的性能，并且结果始终证明了良好的性能。
+
+    主要包含以下部分：
+
+    1.字典格式数据的转换。
+    2.数据增强变换：根据MONAI transform API定义一个新的transform。
+    3.从文件夹加载数据。
+    4.缓存IO和转换以加速训练和验证。
+    5.3D UNETR模型、DiceCE损失函数、多器官分割任务的平均Dice度量。
+
+    完整代码来自：<a href="https://gitcode.com/Project-MONAI/tutorials/blob/main/3d_segmentation/unetr_btcv_segmentation_3d.ipynb?utm_source=csdn_github_accelerator&isLogin=1">MONAI UNETR tutorial</a>
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact1" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 20%;">20%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 20%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>环境准备</h1>
+                <p style="font-size: large;">
+    确保MONAI版本在0.6以上，最好是跟新到最新版本。
+    
+    安装MONAI环境，建议用清华镜像源:
+
+    pip install torch torchvision torchaudio -i https://pypi.tuna.tsinghua.edu.cn/simple 
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 30%;">30%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="30" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 30%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>加载包</h1>
+                <code>
+    import os  
+    # 导入os模块，用于操作系统相关的功能，如文件路径操作、目录创建等。  
+        
+    import shutil  
+    # 导入shutil模块，用于高级文件操作，如复制和删除文件。  
+        
+    import tempfile  
+    # 导入tempfile模块，用于创建临时文件和目录。  
+        
+    import matplotlib.pyplot as plt  
+    # 导入matplotlib.pyplot模块，用于绘图和可视化。  
+        
+    import numpy as np  
+    # 导入numpy模块，用于处理数组和数学运算。  
+        
+    from tqdm import tqdm  
+    # 从tqdm模块导入tqdm，用于显示循环的进度条。  
+        
+        
+    from monai.losses import DiceCELoss  
+    # 从monai.losses模块导入DiceCELoss，用于计算Dice系数和交叉熵的组合损失。  
+        
+    from monai.inferers import sliding_window_inference  
+    # 从monai.inferers模块导入sliding_window_inference，用于滑动窗口推理。  
+        
+    from monai.transforms import (  
+    # 从monai.transforms模块导入一系列的图像变换。
+
+        AsDiscrete,  
+        # 将连续的数据转换为离散的数据。  
+
+        AddChanneld,  
+        # 为数据增加一个通道维度。  
+
+        Compose,  
+        # 将多个变换组合在一起。  
+
+        CropForegroundd,  
+        # 根据前景裁剪图像。  
+
+        LoadImaged,  
+        # 加载图像。  
+
+        Orientationd,  
+        # 转换图像的朝向。  
+
+        RandFlipd,  
+        # 随机翻转图像。  
+        
+        RandCropByPosNegLabeld,  
+        # 根据正负标签随机裁剪图像。  
+
+        RandShiftIntensityd,  
+        # 随机改变图像的强度。  
+
+        ScaleIntensityRanged,  
+        # 改变图像的强度范围。  
+
+        Spacingd,  
+        # 改变图像的间距。  
+
+        RandRotate90d,  
+        # 随机旋转图像90度。  
+
+        ToTensord,  
+        # 将数据转换为tensor。  
+    )  
+        
+    from monai.config import print_config  
+    # 从monai.config模块导入print_config，用于打印MONAI库的配置信息。  
+        
+    from monai.metrics import DiceMetric  
+    # 从monai.metrics模块导入DiceMetric，用于计算Dice系数。  
+        
+    from monai.networks.nets import UNETR  
+    # 从monai.networks.nets模块导入UNETR，这是一个用于3D医学图像分割的U-Net变体。  
+        
+        
+    from monai.data import (  
+    # 从monai.data模块导入一系列的数据处理相关的类和方法。 
+
+        DataLoader,  
+        # 数据加载器，用于加载和批处理数据。  
+
+        CacheDataset,  
+        # 缓存数据集，用于缓存数据以提高加载速度。  
+
+        load_decathlon_datalist,  
+        # 加载Decathlon数据集的列表。  
+
+        decollate_batch,  
+        # 从批次中解耦数据，以便单独处理。  
+    )  
+        
+    import torch  
+    # 导入torch模块，这是PyTorch深度学习框架的主要模块。  
+         
+    print_config()  
+    # 打印MONAI库的配置信息。  
+
+                </code>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 40%;">40%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 40%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>设置模型保存环境</h1>
+                <code>
+    # 创建U-Net模型实例，输入尺寸与图像尺寸匹配
+    model = unet(input_size=(im_height, im_width, 3))
+    
+    # 使用ModelCheckpoint保存模型权重
+    # checkpoint回调会在验证集上的accuracy达到最大值时保存模型
+    checkpoint = tf.keras.callbacks.ModelCheckpoint(
+        
+        filepath='./save_weights/myUnet.ckpt', 
+        # 保存模型的路径
+        
+        monitor='val_acc', 
+        # 使用验证集的指标，选择accuracy
+        
+        save_weights_only=False, 
+        # 只保存权重，不保存整个模型
+        
+        save_best_only=True, 
+        # 只保存最好的模型，不保存所有模型
+        
+        mode='auto', 
+        # 指标比较方式，'auto'自动选择最高值或最小值，此处默认自动处理
+        
+        period=1 
+        # 检查点的周期，每周期检查一次
+    )   
+
+    # 保存模型的权重到指定路径
+    model.save_weights('./save_weights/myUnet.ckpt', save_format='tf')
+
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 60%;">60%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 60%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>设置训练集和验证集的数据集并预处理</h1>
+                    <code>
+    train_transforms = Compose(  
+    # 创建一个Compose对象，用于组合多个图像变换。  
+    [  
+        LoadImaged(keys=["image", "label"]),  
+        # 加载图像和标签。  
+
+        AddChanneld(keys=["image", "label"]),     
+        # 为图像和标签增加一个通道维度。  
+        
+        Orientationd(keys=["image", "label"], axcodes="RAS"),   
+        # 将图像和标签的朝向转换为RAS（右前上）。 
+        
+        Spacingd(  
+            keys=["image", "label"],  
+            pixdim=(1.5, 1.5, 2.0),  
+            mode=("bilinear", "nearest"),  
+        ),       
+        # 改变图像和标签的间距。  
+        
+        ScaleIntensityRanged(  
+            keys=["image"],  
+            a_min=-175,  
+            a_max=250,  
+            b_min=0.0,  
+            b_max=1.0,  
+            clip=True,  
+        ),  
+        #将CT里面的HU值限制在一定区域之间并标准化到(0,1)
+        
+        # 裁剪图像和标签数据的前景部分，以图像为源数据  
+        CropForegroundd(keys=["image", "label"], source_key="image"),  
+        
+        # 随机根据正负标签裁剪图像和标签数据  
+        RandCropByPosNegLabeld(  
+            keys=["image", "label"],       
+            # 需要处理的键值  
+
+            label_key="label",              
+            # 标签数据的键值  
+            
+            spatial_size=(96, 96, 96),     
+            # 裁剪的空间尺寸  
+
+            pos=1,                         
+            # 正样本裁剪数  
+
+            neg=1,                          
+            # 负样本裁剪数  
+
+            num_samples=4,                 
+            # 裁剪样本总数  
+
+            image_key="image",             
+            # 图像数据的键值  
+
+            image_threshold=0,             
+            # 图像阈值  
+        ),  
+
+        # 随机沿着空间轴0翻转图像和标签数据  
+        RandFlipd(  
+            keys=["image", "label"],  
+
+            spatial_axis=[0],             
+            # 沿着第0轴翻转  
+
+            prob=0.10,                    
+            # 翻转的概率  
+        ),  
+        
+        # 随机沿着空间轴1翻转图像和标签数据  
+        RandFlipd(  
+            keys=["image", "label"],  
+
+            spatial_axis=[1],             
+            # 沿着第1轴翻转  
+
+            prob=0.10,                    
+            # 翻转的概率  
+        ),  
+        
+        # 随机沿着空间轴2翻转图像和标签数据  
+        RandFlipd(  
+            keys=["image", "label"],  
+
+            spatial_axis=[2],             
+            # 沿着第2轴翻转  
+
+            prob=0.10,                    
+            # 翻转的概率  
+        ),  
+  
+        # 随机将图像和标签数据旋转90度的倍数  
+        RandRotate90d(  
+            keys=["image", "label"],  
+
+            prob=0.10,                    
+            # 旋转的概率  
+
+            max_k=3,                      
+            # 最大旋转次数（90度, 180度, 270度）  
+        ),  
+    
+        # 随机改变图像数据的强度  
+        RandShiftIntensityd(  
+            keys=["image"],              
+            # 需要处理的键值  
+
+            offsets=0.10,                
+            # 强度偏移量  
+
+            prob=0.50,                    
+            # 改变强度的概率  
+        ),  
+  
+        # 将图像和标签数据转换为Tensor格式  
+        ToTensord(keys=["image", "label"]),  
+    ]  
+    )  
+  
+    # 定义一个用于验证集数据转换的组合操作  
+    val_transforms = Compose(  
+        [  
+            # 加载图像和标签数据  
+            LoadImaged(keys=["image", "label"]),  
+    
+            # 为图像和标签数据增加一个通道维度  
+            AddChanneld(keys=["image", "label"]),  
+    
+            # 设定图像和标签数据的方向为RAS（右前上）  
+            Orientationd(keys=["image", "label"], axcodes="RAS"),  
+    
+            # 改变图像和标签数据的像素间距  
+            Spacingd(  
+                keys=["image", "label"],  
+
+                pixdim=(1.5, 1.5, 2.0),     
+                # 新的像素间距  
+
+                mode=("bilinear", "nearest"), 
+                # 插值方法  
+            ),  
+    
+            # 改变图像数据的强度范围  
+            ScaleIntensityRanged(  
+                keys=["image"],           
+                # 需要处理的键值  
+
+                a_min=-175, a_max=250,     
+                # 原始强度范围的最小和最大值  
+
+                b_min=0.0, b_max=1.0,      
+                # 目标强度范围的最小和最大值  
+
+                clip=True                  
+                # 是否裁剪超出范围的强度值  
+            ),  
+    
+            # 裁剪图像和标签数据的前景部分，以图像为源数据  
+            CropForegroundd(keys=["image", "label"], source_key="image"),  
+    
+            # 将图像和标签数据转换为Tensor格式  
+            ToTensord(keys=["image", "label"]),  
+    
+        ]  
+    )
+                        
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact5" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 70%;">70%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 70%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>下载数据</h1>
+                <p style="font-size: large;">
+    数据来源：
+    
+    在机构审查委员会 (IRB) 的监督下，从正在进行的结直肠癌化疗试验和回顾性腹疝研究的组合中随机选择了 50 份腹部 CT 扫描。 其中，30个用于训练，20个用于测试。
+
+    体积：512 x 512 x 85 - 512 x 512 x 19
+    视野：280 x 280 x 280 mm3 - 500 x 500 x 650 mm3
+    平面分辨率：0.54 x 0.54 mm2 - 0.98 x 0.98 mm2
+    z轴分辨率：2.5 mm 到 5.0 mm
+
+    target: 一共是分割13种器官：1. 脾脏 2. 右肾 3. 左肾 4. 胆囊 5. 食道 6. 肝脏 7. 胃 8. 主动脉 9. 下腔静脉 10. 门静脉和脾静脉 11. 胰腺 12 右肾上腺 13 左肾上腺。
+    
+    训练集的30个数据，再次划分为 24 Training + 6 validation
+
+    链接: <a href="https://pan.baidu.com/s/1-0yMfZ4grBF5UYlRp1t_Rw">https://pan.baidu.com/s/1-0yMfZ4grBF5UYlRp1t_Rw</a> 
+    提取码: ejfp
+
+    将下载好的数据解压，放在项目的 ./data下
+    
+                </p>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact6" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 90%;">90%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 90%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>构建Dataloader</h1>
+                    <code>
+    # 设置数据目录为 "data/"  
+    data_dir = "data/"  
+        
+    # 设置分割文件的JSON路径为 "data/dataset_0.json"  
+    split_JSON = "data/dataset_0.json"  
+        
+    # 拼接数据目录和JSON文件路径，得到完整的数据集路径  
+    datasets = data_dir + split_JSON  
+        
+    # 加载训练数据集列表，返回的是一个包含数据列表的对象  
+    datalist = load_decathlon_datalist(datasets, True, "training")  
+        
+    # 加载验证数据集列表，返回的是一个包含数据列表的对象  
+    val_files = load_decathlon_datalist(datasets, True, "validation")  
+        
+    # 创建一个 CacheDataset 对象用于训练数据，包括数据、转换函数、缓存数量、缓存率和工作线程数  
+    train_ds = CacheDataset(  
+        data=datalist,  
+
+        transform=train_transforms,  
+        # 转换函数，用于处理数据  
+
+        cache_num=24,               
+        # 缓存数据数量  
+
+        cache_rate=1.0,            
+        # 缓存率  
+
+        num_workers=8,            
+        # 数据加载的工作线程数  
+    )  
+        
+    # 创建一个 DataLoader 对象，用于加载训练数据，包括批量大小、是否打乱、工作线程数和是否固定内存  
+    train_loader = DataLoader(  
+        train_ds, batch_size=1, shuffle=True, num_workers=8, pin_memory=True  
+    )  
+        
+    # 创建一个 CacheDataset 对象用于验证数据，类似上面的训练数据  
+    val_ds = CacheDataset(  
+        data=val_files, transform=val_transforms, cache_num=6, cache_rate=1.0, num_workers=4  
+    )  
+        
+    # 创建一个 DataLoader 对象，用于加载验证数据  
+    val_loader = DataLoader(  
+        val_ds, batch_size=1, shuffle=False, num_workers=4, pin_memory=True  
+        
+    ) 
+
+    # 数据增强设置，用于训练数据
+    train_generator_args = {
+        'rotation_range': 0.2,  # 图片随机旋转范围
+        'width_shift_range': 0.05,  # 随机水平平移范围
+        'height_shift_range': 0.05,  # 随机垂直平移范围
+        'shear_range': 0.05,  # 随机剪切范围
+        'zoom_range': 0.05,  # 随机缩放范围
+        'horizontal_flip': True,  # 随机水平翻转
+        'fill_mode': 'nearest'  # 填充方式
+    }
+
+    # 使用数据增强生成训练集数据
+    train_gen = train_generator(df_train, BATCH_SIZE,
+    train_generator_args,
+    target_size=(im_height, im_width)) # df_train是训练数据集
+
+    # 生成验证集的数据，没有做数据增强
+    test_gener = train_generator(df_val, BATCH_SIZE,
+    {}, target_size=(im_height, im_width)) # df_val是验证数据集
+
+                    </code>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact7" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="progress-wrapper">
+                <h4 class="progress-tooltip" style="left: 100%;">100%</h4>
+                <div class="progress" style="height: 3px;">
+                    <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                        aria-valuemax="100" style="width: 100%;"></div>
+                </div>
+            </div>
+            <pre>
+                <h1>构建模型，损失函数，优化器</h1>
+                <code>
+    # 设置环境变量，用于控制CUDA设备的顺序  
+    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"  
+    
+    # 判断是否有可用的CUDA设备，如果有则使用GPU，否则使用CPU  
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  
+    
+    # 创建一个 UNETR 模型，并设置多个参数  
+    model = UNETR(  
+        in_channels=1,                
+        # 输入通道数  
+
+        out_channels=14,             
+        # 输出通道数  
+
+        img_size=(96, 96, 96),      
+        # 图像大小  
+
+        feature_size=16,            
+        # 特征大小  
+
+        hidden_size=768,            
+        # 隐藏层大小  
+
+        mlp_dim=3072,               
+        # 多层感知机维度  
+
+        num_heads=12,               
+        # 自注意力头数  
+
+        pos_embed="perceptron",    
+        # 位置嵌入方式  
+
+        norm_name="instance",      
+        # 归一化名称  
+
+        res_block=True,            
+        # 是否使用残差块  
+
+        dropout_rate=0.0,          
+        # 丢弃率  
+    ).to(device)  
+    # 将模型移动到指定的设备上  
+    
+    # 创建一个 DiceCELoss 对象，作为损失函数，其中 to_onehot_y=True 表示输出标签需要转换为 one-hot 编码  
+    loss_function = DiceCELoss(to_onehot_y=True, softmax=True)  
+    
+    # 设置 PyTorch 的 CUDNN 为 benchmark 模式，可以加速训练过程  
+    torch.backends.cudnn.benchmark = True  
+    
+    # 创建一个 AdamW 优化器，用于训练模型，并设置学习率和权重衰减  
+    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=1e-5)
+                         
+    原文链接：<a href="https://blog.csdn.net/u014264373/article/details/125192227">https://blog.csdn.net/u014264373/article/details/125192227</a>
+
+                </code>
+            </pre>
+        </div>
+        <div style="height: 200px;"></div>
+        <div>
+            <fieldset class="layui-elem-field layui-field-title" style="background-color: aliceblue;">
+                <legend>发表评论</legend>
+                <input type="hidden" id="tieba_id" name="tiebaId" value="1">
+                <textarea id="editor" lay-verify="content" class="layui-textarea" name="text"></textarea>
+                <button type="button" class="layui-btn comSub">提交评论</button>
+            </fieldset>
+            <hr style="margin-top: 30px; margin-bottom: 20px;">
+            <div style="text-align: center;">
+                <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                    aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#navbarsDefault1"
+                    aria-controls="navbarsDefault1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault1">
+                <ul class="comment">
+                    {% for com in comment|reverse %}
+                    <li class="bg-white mt-4" style="border: 1px solid black;">
+                        <p class="myText">{{ com.text }}</p>
+                        <p>评论人：{{ com.user }} &nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ com.create_time }}</p>
+                    </li>
+                    {% else %}
+                    <li>期待你的评论</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let editor;
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            licenseKey: '',
+            language: 'en',
+        })
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    $(function () {
+        $(".myText").each(function () {
+            $(this).html($(this).text());
+        });
+    })
+    function insertStr(str, index, insertStr) {
+            return str.substring(0, index) + insertStr + str.substring(index)
+        }
+    layui.use(['form'], function () {
+        var form = layui.form;
+        $(".comSub").click(function () {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                //获取评论内容
+                var text = editor.getData();
+                var tiebaId = $("#tieba_id").val();
+                if (text == "" || text == undefined) {
+                    layer.msg("评论不能为空哦！", { icon: 0 });
+                } else {
+                    var temp = text.indexOf("<img style=");
+                        while (temp != -1) {
+                            text = insertStr(text, temp + 11, "height:200px;width:200px;");
+                            temp = text.indexOf("<img style=",temp+11);
+                        }
+                    $.post("/tieba/comment", { text: text, tiebaId: tiebaId }, function (result) {
+                        if (result.success) {
+                            window.location.href = '/deeplearning/A1';
+                        }
+                    })
+                }
+            });
+        })
+    });
+</script>
+{% endblock %}

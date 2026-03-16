@@ -1,0 +1,2474 @@
+{% extends 'base.html' %} {% block title %} 医影智学平台 {% endblock %} {% block
+head %}
+<!-- 定义主页背景色的CSS样式 -->
+<script src="../../static/js/waibu/image-compare-viewer.min.js"></script>
+<script src="../../static/js/waibu/layui.js"></script>
+<script src="../../static/js/waibu/jquery.min.js"></script>
+<script src="../../static/js/bootsrap/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/waibu/editormd.js"></script>
+<script src="../../static/js/waibu/layedit.js"></script>
+<script src="../../static/js/wangzhan/imageprocessing.js"></script>
+<script src="../../static/build/ckeditor.js"></script>
+
+<link rel="stylesheet" href="../static/css/waibu/image-compare-viewer.min.css">
+<link href="../../static/css/waibu/layui.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../static/css/waibu/jquery-scrollbar.css" />
+<link rel="stylesheet" href="../../static/css/wangzhan.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-grid.rtl.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="../../static/css/bootstart/bootstrap-utilities.css" />
+{% endblock %} {% block body%}
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-dark bg-dark py-4">
+    <div class="container">
+        <a class="h1 navbar-brand" href="{{url_for('root')}}">欢迎来到医影智学平台!</a>
+        <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarsDefault" aria-expanded="false"
+            aria-controls="navbarsDefault">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault">
+            <ul class="navbar-nav ml-auto align-items-lg-center">
+                <li class="nav-item">
+                    <a href="{{url_for('tieba.tieba_root')}}" class="nav-link">贴吧</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('onlinetesting.onlinetesting')}}" class="nav-link">在线测试</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">解剖学学习</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A1')}}">头骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A2')}}">心脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A3')}}">人体骨骼结构</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A4')}}">肾脏</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A5')}}">肺</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A6')}}">盆骨</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A7')}}">大脑</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A8')}}">女体</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deplaning.A9')}}">造影</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">医学图像处理案例</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A1')}}">使用Tansformer分割三维腹部多器官</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A2')}}">基于U-net的CT肿瘤图像分割</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url_for('deeplearning.A3')}}">深度学习经典入门项目—手写数字识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{url_for('deeplearning.A4')}}">基于Tensorflow2.0的大脑肿瘤识别</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{url_for('deeplearning.A5')}}">U-Net实现肺部图像分割(pytorch)</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('imageprocessing.imageprocessing_root')}}" class="nav-link">医学图像处理基础</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="false"
+                        aria-expanded="false">用户</a>
+                    <ul class="dropdown-menu" style="min-width: 22px;">
+                        <li>
+                            <a href="{{url_for('login.login')}}" class="dropdown-item">登录</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.register')}}" class="dropdown-item">注册</a>
+                        </li>
+                        <li>
+                            <a href="{{url_for('login.retrieve')}}" class="dropdown-item">找回</a>
+                        </li>
+                        <li>
+                            <a href="/admin" class="dropdown-item">后台</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <aside class="col-xs-3">
+        <h3 class="h3 text-white pt-3 pb-5">医学图像处理</h1>
+            <div class="scroll-wrapper" style="position: relative;">
+                <div class="scroll-content"
+                    style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 430px;">
+                    <ul class="list-group" id="myTab" role="tablist">
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第一章 图像处理绪论</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                                type="button" role="tab" aria-controls="contact" aria-selected="true"> 1. 医学图像的发展及分类</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact1"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 医学图像处理的特点</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact2"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3.
+                                医学图像处理的主要问题</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact3"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 4. 图像处理及其特点</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact4"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 5. 数字图像处理的目的</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact5"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 6. 数字图像处理的内容</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact6"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 7.
+                                相关领域及数字图像处理系统</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact7"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 8.
+                                数字图像处理的发展动向</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact8"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 9. 数字图像处理的应用</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第二章 图像处理基础</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact9"
+                                type="button" role="tab" aria-controls="contact" aria-selected="true"> 1. 图像、数字图像及像素</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact10"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 分辨率</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact11"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 图像和视觉基础</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact12"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 4. 图像的数字化</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact13"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 5. 位图图像文件格式</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第三章 图像变换</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact14"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 傅里叶变换</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact15"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 离散余弦变换</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact16"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 小波变换</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第四章 图像增强与复原</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact17"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 直方图及灰度增强</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact18"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2.
+                                图像增强与图像复原技术概述</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact19"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 图像平滑</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact20"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 4. 图像锐化</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact21"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 5. 图像频域增强</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact22"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 6. 彩色增强</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact23"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 7. 图像退化与图像复原</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第五章 图像分割与二值图像处理
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact24"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 图像分割</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact25"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 二值图像形态学运算</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第六章 图像几何变换</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact26"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 图像的位置变化</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact27"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 图像的形状变化</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact28"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 图像的仿射变换</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第七章 图像压缩与编码</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact29"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 压缩的概念</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact30"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 三种数据冗余类型</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact31"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 图像压缩模型</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact32"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 4. 处理过程</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第八章 图像特征分析</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact33"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 图像特征</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact34"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2.
+                                图像特征提取算法——HOG特征</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact35"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3.
+                                图像特征提取算法——LBP特征</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact36"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 4.
+                                图像特征提取算法——Haar特征</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第九章 图像配准与识别</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact37"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 图像配准的概念</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact38"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 配准的分类</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact39"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 流程</a>
+                        </li>
+                        <li class="list-group-item" role="presentation" style="background-color:aqua;">第十章 医学图像的应用</li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact40"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 1. 图像分割</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact41"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 2. 图像配准和图像融合</a>
+                        </li>
+                        <li class="list-group-item" style="background-color:azure">
+                            <a class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact42"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false"> 3. 伪彩色处理技术</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </aside>
+    <div style="height: 100px;"></div>
+    <div class="tab-content col-xs-7" id="myTabContent">
+        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>医学图像的发展及分类</h1>
+                <p style="font-size: large;">
+    自1895年X线发现后所开创的医学图像学，近二十多年来发展异常迅速，也成为现代医学诊断，治疗，手术等方面最重要最有力的工具。把成像原理和图像性质综合起来，医学成像不仅是静态的组织结构成像，而且可以实现动态图像，功能成像。
+
+                </p>
+                </pre>
+        </div>
+        <div class="tab-pane fade" id="contact1" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>医学图像处理的特点</h1>
+                <p style="font-size: large;">
+    数字图像处理就是把在空间上离散的、在幅度上量化分层的数字图像，经过一些特定数理模式的加工处理，以达到有利于人眼视觉或某种接收系统所雷要的图像的过程。
+
+    主要有以下几个基本特点:
+
+    （1）处理精度高，再现行好；
+
+    （2）易于控制处理效果；
+
+    （3）处理的多样性；
+
+    （4）数字图像中各个像素之间的相关性和压缩的潜力大；
+
+    （5）图像数据量庞大；
+
+    （6）占用的频带较宽；
+
+    （7）图像质量评价受主观因素的影响；
+
+    （8）图像处理综合性较强。
+
+                </code>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact2" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>医学图像处理的主要问题</h1>
+                <p style="font-size: large;">
+    医学图像处理存在的主要问题有优质重建、伪影校正、图像配准、目标分割、运动估计、图像压缩、边缘检测、MR非均匀性校正、血管重建。
+
+                </code>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像处理及其特点</h1>
+                <p style="font-size: large;">
+    图像处理是指对数字图像进行各种算法和技术的处理，以提取出有用的信息并改善图像质量。其特点在于需要使用数学方法、信号处理和计算机科学等多个领域的知识，从而实现对图像的增强、分割、检测、识别、压缩等处理过程。同时，图像处理还具有实时性、精图像处理是指对数字图像进行一系列处理和计算，以提取出其中的有用信息并改善或增强图像的质量。其特点包括：非线性、高维、复杂多变、需要大量计算和专业知识等。
+
+                </code>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>数字图像处理的目的</h1>
+                <p style="font-size: large;">
+    一般而言，对图像进行处理主要有以下3个方面的目的：
+
+    （1）提高图像的视感质量，以达到赏心悦目的目的。如去除图像中的噪声、改变图像的亮度和颜色、增强图像中的某些成分、抑制某些成分对图像进行几何变换等，从而改善图像的质量，以达到或真实的、或清晰的、或色彩丰富的、或意想不到的艺术效果。
+
+    （2）提取图像中所包含的某些特征成特殊信息，以便于计算机分析，例如用作模式识别、计算机视觉的预处理等。这些特征包括很多方面。如频域特性、灰度/颜色特性、边界/区域特性、纹理特性、形状/拓扑特性以及关系结构等。
+
+    （3）对图像数据进行变换、编码和压缩，以便于图像的存储和传输。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact5" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>数字图像处理的内容</h1>
+                <p style="font-size: large;">
+    图像处理需要用计算机图像处理系统对图像数据进行输入、加工和输出。因此。数字图像处理研究的内容主要有以下7个过程：图像获取、表示和表现；图像复原；图像增强；图像分割；图像分析；图像重建；图像压缩编码。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact6" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>相关领域及数字图像处理系统</h1>
+                <img src="/static/images/图片1.png" class="img-fluid" alt="...">
+                <br>
+                <img src="/static/images/图片2.png" class="img-fluid" alt="...">
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact7" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>数字图像处理的发展动向</h1>
+                <p style="font-size: large;">
+    1.从低分辨率向高分辨率发展
+    
+    随着图像传感器分辨率和计算机运算速度的不断提高，图像存储器内存，计算机内存及外设的存储容量不断增大，数字图像也由低分辨率向高分辨率不断发展，数字图像处理的运算量也越来越大，对处理和显示设备的要求也越来越高；
+                    
+    2.从二维（2D）向三维（3D）发展
+        
+    三维图像获取及处理技术主要通过全息摄影实现，或通过断层扫描和图像重建实现。随着图像    技术和计算机技术的发展，三维图像的展示将极大提升用户的浸入感；
+                    
+    3.从静止图像向动态图像发展
+        
+    随着传感器分辨率和主机运算速度的提高，计算机内存及外存容量的增大，数字图像处理由以静止图像处理为主的发展到静止图像和动态图像并存并相互补充互相促进的局面；
+                    
+    4.从单态图像向多态图像发展
+                    
+    多态图像是指对于同一目标，景物或场景，采用不同的图像传感器或在不同条件下获取图像，然后对这些图像进行综合处理和应用；
+                    
+    5.结合应用数学新进展
+                    
+    （1）深度学习：深度学习已经成为图像处理领域的主流方法之一。它基于神经网络模型，通过训练大量数据集使得模型能够自动识别和分类图像中的对象。这种方法已经被广泛应用于人脸识别、医疗图像分析等领域；
+                    
+    （2）压缩感知：压缩感知理论认为，当信号具有稀疏性时，可以在低维空间中采样并重构出原始信号。这种理论被广泛应用于数字图像和视频压缩，并在相同质量下比传统压缩技术节省更多的存储空间和传输带宽；
+        
+    （3）图像分割：图像分割是指将一幅图像分成若干个不重叠的区域，并对每个区域进行处理。在图像处理中，图像分割是非常重要的一个步骤。新近的数学方法如基于谱聚类和流形学习等，能够更好地解决图像分割问题。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact8" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>数字图像处理的应用</h1>
+                <p style="font-size: large;"> 
+    1.通讯：
+
+    通讯包括图像传输、电视电话、电视会议等，主要是进行图像压缩甚至理解基础上的压缩。
+
+    2.宇宙探测：
+        
+    由于太空技术的发展，需要用数字图像处理技术处理大量的星体照片。
+    
+    3.遥感：
+    
+    航空遥感和卫星遥感图像需要用数字技术加工处理，并提取有用的信息。主要用于地形地质，矿藏探查，森林、水利、海洋、农业等资源调查，自然灾害预测预报，环境污染监测，气象卫星云图处理以及地面军事目标的识别。
+    
+    4.生物医学领域中的应用：
+    
+    图像处理在医学界的应用非常广泛，无论是临床诊断还是病理研究都大量采用图像处理技术。它的直观、无创伤、安全方便等优点备受青睐。
+    
+    5.工业生产中的应用：
+    
+    工业生产线中对产品及部件进行无损检测是图像处理技术的重要应用领域。该领域的应用从70年代起取得了迅速的发展，主要有产品质量检测、生产过程的自动控制、CAD／CAM等。
+    
+    6.军事、公安等方面的应用：
+    
+    军事目标的侦察、制导和警戒系统、自动灭火器的控制及反伪装；公安部门的现场照片、指纹、手迹、印章、人像等的处理和辨识；历史文字和图片档案的修复和管理等。
+    
+    7.机器人视觉：
+        
+    机器视觉作为智能机器人的重要感觉器官，主要进行三维景物理解和识别，是目前处于研究之中的开放课题。机器视觉主要用于军事侦察、危险环境的自主机器人，邮政、医院和家庭服务的智能机器人，装配线工件识别、定位，太空机器人的自动操作等。
+    
+    8.视频和多媒体系统：
+    
+    电视制作系统广泛使用的图像处理、变换、合成，多媒体系统中静止图像和动态图像的采集、压缩、处理、存贮和传输等。
+    
+    9.电子商务：
+    
+    在当前呼声甚高的电子商务中，图像处理技术也大有可为，如身份认证、产品防伪、水印技术等。
+    
+    10.影视图像处理、计算机合成图像、广告、娱乐等。
+    
+    
+    资料来源：<a href="https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792">https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792</a>
+
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact9" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像、数字图像及像素</h1>
+                <p style="font-size: large;"> 
+    对客观存在的物体的某种属性的描述称为图像；计算机处理的图像统称为数字图像。为了方便地处理数字图像，根据数字图像的特性将其分成不同的类型。静态图像可分为矢量（Vector）图和位图（Bitmap），位图也称为栅格图像；平面图像由二维的元素组成，每一个元素具有一个特定的位置（x，y）和幅值f（x，y），这些元素就称为像素。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact10" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>分辨率</h1>
+                <p style="font-size: large;"> 
+    图像处理中常见的且最重要的分辨率类型：图像分辨率、屏幕分辨率、位分辨率、打印机分辨率、扫描仪分辨率。
+
+    （1）图像分辨率是指每英寸图像含有多少个点或像素， 分辨率的单位为ppi。例如，250ppi表示的就是该图像每英寸含有250个点或像素。
+
+    （2）屏幕分辨率是指显示器上每单位长度显示的像素或点的数量。通常以每英寸点数(dpi)来表示。屏幕分辨率取决于显示器的大小及其像素设置。
+
+    （3）位分辨率又称位深，是用来衡量每个象素储存信息的位数。 这种分辨率决定了每次在屏幕上可显示多少种颜色。一般常见的有8位、24位或32位颜色。
+
+    （4）打印机分辨率又称输出分辨率，是指打印机输出图像时每英寸的点数(dpi)。打印机分辨率也决定了输出图像的质量，打印机分辨率越高，可以减少打印的锯齿边缘，在灰度的半色调表现上也会较为平滑。
+
+    （5）扫描仪分辨率的表示方法与打印机相类似，一般也用dpi表示， 不过这里的点是样点，与打印机的输出点是不同的。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact11" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像和视觉基础</h1>
+                <p style="font-size: large;"> 
+    图像和视觉基础可分三类，分别是光的特性、视觉系统和颜色。
+    
+    （1）光的特性是指光的传播方式和性质，包括光的波动性、粒子性、光速、偏振、折射、反射、干涉、衍射等。
+
+    （2）图像的视觉原理指的是人类感知和理解图像的生理和心理机制，包括颜色、亮度、对比度、形状、纹理、深度等方面的知觉规律。
+    
+    （3）白光通过棱镜，就会折射出颜色的光谱。一般可以分解成红、橙、黄、绿、青、蓝、紫七色，可见光谱的每部分都有它自己唯一的值。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact12" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像的数字化</h1>
+                <p style="font-size: large;"> 
+    图像的数字化可以分为：图像的数学模型、图像的采样和量化、数字图像的表示、数字图像的质量。
+    
+    （1）图像的数学模型
+        
+    在计算机中,图像被分割成如下图所示的像素，各像素的灰度值用整数表示。一幅M×N个像素的数字图像其像素灰度值可以用M行、N列的矩阵f(i,j)表示：
+
+    <img src="/static/images/图片3.png" class="img-fluid" alt="...">
+
+    习惯上把数字图像左上角的像素定为(1,1)个像素，右下角的像素定为(M,N)个像素。若用i表示垂直方向，表示水平方向，这样，从左上角开始，纵向第i行，横向第j列的第(i,j)个像索就存储到矩阵的元素f(i,j)。中，数字图像中的像索与二维矩阵中的每个元素便一一对应起来。
+
+    <img src="/static/images/图片4.png" class="img-fluid" alt="...">
+                           
+    （2）图像的采集与量化
+                    
+    图像的采集是指利用各种设备和技术，将现实中的物体或场景转化为数字形式的图像的过程。图像的量化是指将连续的图像数据转换为离散的数值，以便于数字图像处理和存储。
+                    
+    （3）数字图像的表示
+                    
+    数字图像的表示是指将图像转换为数字信号的过程，即利用数字化技术将连续的图像信号离散化为数字形式，并存储在计算机中。数字图像的表示通常包括两个方面：空间域和频率域。
+                    
+    （4）数字图像的质量
+
+    1.层次
+
+    <img src="/static/images/图片5.png" class="img-fluid" alt="..">
+                    
+    2.对比度
+        
+    <img src="/static/images/图片6.png" class="img-fluid" alt="..">
+            
+    3.亮度
+
+    <img src="/static/images/图片7.png" class="img-fluid" alt="..">
+                    
+                    
+    4.尺寸大小
+
+    <img src="/static/images/图片8.png" class="img-fluid" alt="..">            
+                
+    5.颜色饱和度
+
+    <img src="/static/images/图片9.png" class="img-fluid" alt="..">
+                    
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact13" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>位图图像文件格式</h1>
+                <p style="font-size: large;"> 
+    数字图像有多种存储格式，在计算机中是以图像文件的形式存放的，每种格式一般由不同的开发商支持。随着信息技术的发展和图像应用领域的不断拓宽，还会出现新的图像格式。因此，要进行图像处理，必须了解图像文件的格式，即图像文件的数据构。每一种图像文件均有一个文件头，在文件头之后才是图像数据。文件头的内容由制作该图像文件的公司决定，一般包括文件类型、文件制作者、制作时间、版本号、文件大小等内容。目前较常用的静态图文件格式有BMP GIF、TIFF JPEG等类型。
+
+    BMP文件又称位图文件(bitmap, BMP)是一种与设备无关的图像文件格式。BMP文件格式是一种位映射的存储形式。它是Windows 软件推荐使用的一种格式，随着Windows的普及，BMP文件格式的应用越来越广泛。
+
+    图形交换格式(Graphics Interchange Formar ,GIF)是CompuServe公司开发的文件存储格式。1987年开发的GIF文件格式的版本号是GIF87a,1989年进行了扩充，扩充后的版本号定义为GIF89a。它支持2-6M种颜色、单个文件的多重图像、按行扫描的快速解码、有效的压缩以及硬件无关性。
+    
+    JPEG是Joint Photographic Experts Group(联合图像专家组)的缩写，是用于连续色调静态图像压缩的一种标准。其主要方法是采用预测编码(DPCM)、离散余弦变换(DCT)以及熵编码，以去除冗余的图像和彩色数据，属于有损压缩方式。JPEG是一种高效率的24位图像文件压缩格式,同样一幅图像，用JPEG格式存储的文件是其他类型文件的1/10~1/20，通常只有几十KB，而颜色深度仍然是24位，其质量损失非常小，基本上无法看出。JPEG 文件的应用也十分广泛，特别是在网络和光盘读物上，都有它的影子。JPEG文件的扩展名为jpg或jpeg。
+
+    标记图像文件格式(Tag Image File Format,TIFF)是基于标志域的图像文件格式。有关图像的所有信息都存储在标志城中，如图像大小、所用计算机型号、制造商、图像的作者说明、软件及数据。
+    
+    PhotoshopDocument（PSD）是著名的Adobe公司的图像处理软件Photoshop的专用格式。PSD其实是Photoshop进行平面设计的一张“草稿图”，它里面包含有各种图层、通道、遮罩等多种设计的样稿，以便于下次打开文件时可以修改上一次的设计。在Photoshop所支持的各种图像格式中，PSD的存取速度比其它格式快很多，功能也很强大。
+        
+    PNG（PortableNetworkGraphics）是一种新兴的网络图像格式。在1994年底，由于Unysis公司宣布GIF拥有专利的压缩方法，要求开发GIF软件的作者须缴交一定费用，由此促使免费的png图像格式的诞生。PNG一开始便结合GIF及JPG两家之长，打算一举取代这两种格式。1996年10月1日由PNG向国际网络联盟提出并得到推荐认可标准，并且大部分绘图软件和浏览器开始支持PNG图像浏览。DICOM（数字图像和通信在医学中）是一种用于存储、传输和管理医学图像的标准格式。它是数字医学影像处理领域最常用的文件格式之一；DICOM文件格式包含了医学图像的元数据、图像本身以及其他相关信息，如患者的基本信息、图像采集设备的相关参数等。这些数据都被编码到一个单独的文件中，以便在不同的系统和设备之间进行传输和共享；DICOM文件格式非常灵活，可以容纳各种类型的医学图像，包括X光、CT、MRI、超声波和核医学图像等。此外，DICOM文件格式还支持多个图像的组合、三维重建和图像分析等高级功能，使其为医学图像处理领域不可或缺的标准文件格式之一。
+    
+    
+    资料来源：<a href="https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792">https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792</a>
+                
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact14" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>傅里叶变换</h1>
+                <p style="font-size: large;"> 
+    傅里叶变换在数学中的定义十分严格，设f（x）为x的函数，如果f（x）满足下面的狄里赫莱条件：
+                    
+    （1）具有有限个间隔点；
+
+    （2）具有有限个极点；
+
+    （3）绝对可积。
+                    
+    1.连续傅里叶变换
+                    
+    （1）一维连续傅里叶变换
+            
+    设f(x)为实变量x的连续函数，f(x)的傅里叶变换表示为F{f(x)},定义为：一维连续傅里叶反变换,如果给定F(μ),则f(x)可以由傅里叶反变换得到：
+    
+    <img src="/static/images/图片10.png" class="img-fluid" alt="..">
+
+    上述这两个变换公式称为傅立时变换对，其中x为时域变量，μ为频域变量，如果再令ω=2πμ，则上面两个式子可写成：
+    
+    <img src="/static/images/图片11.png" class="img-fluid" alt="..">
+
+
+    再由欧拉公式得：
+    
+    <img src="/static/images/图片12.png" class="img-fluid" alt="..">
+
+    所以傅立叶变换的结果是一个复数表达式。设其实部是R（ω），虚部是I（ω），则：
+    
+    <img src="/static/images/图片13.png" class="img-fluid" alt="..">
+    
+    <img src="/static/images/图片14.png" class="img-fluid" alt="..">
+
+
+    其中，通常称|F(ω)|为f(x)的傅立叶幅度谱，φ(ω)为f(x)的相位谱。
+
+    （2）二维连续的傅里叶变换
+
+    如果f(x,y)连续可积，并且F(μ,v)可积，则存在以下傅里叶变换－反变换对，其中μ,v为频率变量：
+    
+    <img src="/static/images/图片15.png" class="img-fluid" alt="..">
+
+    同样，二维傅立叶变换的幅度谱和相位谱可定义为：
+
+    <img src="/static/images/图片16.png" class="img-fluid" alt="..">
+
+    可以定义：
+
+    <img src="/static/images/图片17.png" class="img-fluid" alt=".."> 
+        
+    通常称其为能量谱。
+    
+    （3）离散傅里叶变换
+
+    离散傅里叶变换（Discrete Fourier Transform，DFT）是对连续信号傅里叶变换的一种离散化处理，通常用于数字信号处理。它将一个有限长的序列转换为另一个有限长的序列，这两个序列在数值上是相等的。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact15" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>离散余弦变换</h1>
+                <p style="font-size: large;"> 
+    Fourier变换的一个最大的问题是：它的参数都是复数，在数据描述上相当于实数两倍。为此，希望有一种能够达到相同功能但数据量又不大的变换，于是产生了离散余弦（DCT）变换。
+    
+    概述：
+    
+    （1）当f（x）或f（x，y）为偶函数时，变换计算公式只有余弦项。
+
+    <img src="/static/images/图片18.png" class="img-fluid" alt="..">
+
+    （2）一个任意函数采样从0，1，2，…，N-1，若向负方向折叠形成2N点采样偶函数，就可进行2N的偶函数傅立叶变换。
+
+    （3）余弦变换是简化傅立叶变换的一种方法。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact16" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>小波变换</h1>
+                <p style="font-size: large;"> 
+    1.连续小波变换
+
+    连续小波变换（CWT）是一种信号分析技术，用于将一个信号转换成不同尺度的小波函数的线性组合，以探测其中的频率成分。与离散小波变换（DWT）相比，CWT 可以在时间和频率域上同时提供更多信息。CWT基于 Morlet 小波函数，它是一个复指数正弦波和高斯函数的乘积。该函数可以通过滑动窗口的方式应用到信号上，每个窗口的大小对应着一个不同的尺度。CWT 的输出结果是一个二维矩阵，其中包含了各个尺度下信号的频率成分信息。
+
+    CWT的优点在于它可以捕捉信号中的瞬时频率变化，并且能够提供高分辨率的频谱信息。但是，CWT 的缺点是计算复杂度高，在实际应用中往往需要选择适当的尺度范围和步长，避免过度拟合或欠拟合。
+
+    2.离散小波变换
+
+    离散小波变换（DWT）是一种数学变换技术，可将信号转换为不同尺度的频带，并且具有时间和频率局限性。它是基于小波分析理论的一种信号处理方法，可以应用于数据压缩、信号去噪、信号特征提取等领域。
+        
+    在DWT中，信号被分解成多个尺度的频带，每个频带都对应着一定的时间范围。这些频带通常被分为高频和低频两类，其中高频表示信号的细节部分，低频表示信号的平滑部分。通过对这些频带进行逐层分解和重构，可以实现对信号的精细分析和还原。
+    
+    DWT被广泛应用于数字信号处理、图像处理、音频处理、视频处理等领域，是一种非常有效的信号处理工具。
+    
+    3.小波重构
+    
+    将信号的小波分解的分量进行处理后，一般还要根据需要把信号恢复出来，也就是利用信号的小波分解的系数还原出原始信号，这一过程称为小波重构（Wavelet Reconstruction）或叫做小波合成（Wavelet Synthesis）。这一合成过程的数学运算叫做逆离散小波变换（Inverse Discrete Wavelet Transform ，IDWT）。
+    
+    <img src="/static/images/图片19.png" class="img-fluid" alt="..">
+
+    4.小波包分析
+
+    在小波分解中，一个信号可以不断分解为近似信号和细节信号，近似信号可以继续分解，但细节信号不能分解，为此，人们又提出了对信号的小波包分解。使用小波包分解，不但可以不断分解近似信号，也可以继续分解细节信号，从而使整个分解构成一个二叉树结构，如图所示：
+
+    <img src="/static/images/图片20.png" class="img-fluid" alt="..">
+
+    资料来源：<a href="https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792">https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792</a>
+                
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact17" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>直方图及灰度增强</h1>
+                <p style="font-size: large;"> 
+    直方图是这样一张二维的坐标系，其横轴代表的是图像中的亮度，由左向右，从全黑逐渐过渡到全白；纵轴代表的则是图像中处于这个亮度范围的像素的相对数量。灰度直方图增强常用的方法有两个：直方图均衡化和直方图规定化。
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python7" aria-controls="python7">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python7">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab7" aria-controls="matlab7">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab7">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text.jpg"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">直方图均衡化</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic7">
+                        <input type="file" name="pic7" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic7(this)" /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none16" style="float: left;width: 50%"></div>
+                    <div id="display_none17" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare7" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none16">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none17">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact18" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像增强与图像复原技术概述</h1>
+                <p style="font-size: large;"> 
+    图像增强(Image Enhancement)是数字图像处理技术中最基本的内容之一，是相对于图像识别、图像理解而言的一种前期处理，其主要目的是：运用一系列技术手段改善图像的视觉效果，提高图像清晰度；将图像转化成一种更适合于人或计算机进行分析处理的形式。因此，改善图像质量是图像增强的根本目的。图像复原(Image Restora-tion)与图像增强技术一样，也是一种改善图像质量的技术。在图像的获取和传输过程中，由于成像系统和传输介质等方面的原因，将不可避免地造成图像质量的下降(退化)。图像的复原就是根据事先建立起来的系统退化模型，将降质了的图像以最大的保真度恢复成真实的景象。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact19" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像平滑</h1>
+                <p style="font-size: large;"> 
+    图像往往会受到各种噪声的干扰。噪声来源于图像形成过程中的各个环节中。例如感光片的颗粒噪声，光学系统中的异物，散射光，传感器光电转换过程中的光电子噪声、元件中的热噪声，模数转化的运算误差等，都会形成图像噪声。
+
+    噪声在图像上往往表现为孤立像素的离散性变化，空间上和相邻像素不相关，噪声像素的灰度和其他周围邻近像素的灰度有明显的突变。图像噪声使图像质量下降，给图像处理和分析带来不利的影响。可以通过图像叠加和图像平滑等技术来降低噪声对图像的影响。
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python2" aria-controls="python2">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python2">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab2" aria-controls="matlab2">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab2">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text.jpg"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">平滑处理</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic1">
+                        <input type="file" name="pic2" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic2(this)" /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none4" style="float: left;width: 50%"></div>
+                    <div id="display_none5" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare2" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none4">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none5">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact20" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像锐化</h1>
+                <p style="font-size: large;"> 
+    在图像识别中,需要有边缘鲜明的图像,即图像锐化。图像锐化的目的是为了突出图像的边缘信息,加强图像的轮廓特征,以便于人眼的观察和机器的识别。然而边缘模糊是图像中常出现的质量问题,由此造成的轮廓不清晰,线条不鲜明,使图像特征提取、识别和理解难以进行。增强图像边缘和线条,使图像边缘变得清晰的处理称为图像锐化。
+        
+    图像锐化从图像增强的目的看,它是与图像平滑相反的一类处理。边缘和轮廓一般都位于灰度突变的地方,由此人们很自然地想起用灰度差分突出其变换。然而,由于边缘和轮廓在一幅图像中常常具有任意的方向,而一般的差分运算是有方向性的,因此和差分方向一致的边缘、轮廓便检测不出来。为此,人们希望找到一些各向同性的检测算子,它们对任意方向的边缘、轮廓都有相同的检测能力。具有这种性质的锐化算子有梯度、拉普拉斯和其他一些相关运算。如果从数学的观点看,图像模糊的实质就是图像受到平均或者积分运算的影响,因此对其进行逆运算(如微分运算),就可以使图像清晰。
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python1" aria-controls="python1">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python1">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab1" aria-controls="matlab1">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab1">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text.jpg"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">锐化处理</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic1">
+                        <input type="file" name="pic1" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic1(this)" /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none2" style="float: left;width: 50%"></div>
+                    <div id="display_none3" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare1" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none2">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none3">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact21" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像频域增强</h1>
+                <p style="font-size: large;"> 
+    在频域空间，图像的信息表现为不同频率分量的组合。如果能让某个范围内的分量或某些频率的分量受到抑制而让其他分量不受影响，就可以改变输出图像的频率分布，达到不同的增强目的。
+
+    卷积理论是频域技术的基础。设函数f (x, y)与线性时不变算子h(x, y)的卷积结果是g(x, y)，即g(x, y) = h(x, y) * f (x, y)，那么根据卷积定理在频域有：
+
+    <img src="/static/images/图片21.png" class="img-fluid" alt="..">
+
+    其中G(u,v)，H(u,v)，F(u,v)分别是g(x,y)，h(x,y)，f(x,y)的傅里叶变换。用线性系统理论的话来说，H(u,v)是转移函数，转移函数的设计要根据增强目的进行，其基本思路是要允许一定频率通过，限制或消减另外一些频率。
+    
+    在具体增强应用中，f(x,y)是给定的（所以F(u,v)可利用变换得到），只需要确定了H(u,v)，那么具有所需特性的g(x,y)就可由算出的G(u,v)而得到：
+
+    <img src="/static/images/图片22.png" class="img-fluid" alt="..">
+
+    步骤：
+
+    （1）转换到频域f(x,y) - > F(u,v)；
+
+    （2）在频域增强F(u,v)×H(u,v)；
+
+    （3）转换回空域G(u,v) - > g(x,y)。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact22" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>彩色增强</h1>
+                <p style="font-size: large;"> 
+    1.伪彩色和增强
+
+    人的生理视觉系统特性对微小的灰度变化不敏感,而对彩色的微小差别极为敏感。人眼一般能够区分的灰度级只有20多个,而对不同亮度和色调的彩色图像分辨能力却可达到灰度分辨能力的百倍以上。利用这个特性,就可以把人眼不敏感的灰度信号映射为人眼灵敏的彩色信号,以增强人对图像中细微变化的分辨力。彩色增强就是根据人的这个特点,将彩色用于图像增强之中。在图像处理技术中,彩色增强的应用十分广泛且效果显著。
+    
+    常见的彩色增强技术主要有假彩色增强及伪彩色增强两大类。
+    
+    [1]假彩色(False Color)增强是将一幅彩色图像映射为另一幅彩色图像,从而达到增强彩色对比,使某些图像达到更加醒目的目的。假彩色增强技术也可以用于线性或者非线性彩色的坐标变换,由原图像基色转变为另一组新基色。
+    
+    [2]伪彩色(Pesudocol-or)增强是把一幅黑白域图像的不同灰度级映射为一幅彩色图像的技术手段。真彩色(True Color)自然物体的彩色叫做真彩色。真彩色图像的分光系统和色光合成如下图所示。分光过程一般可用红、绿、蓝3种滤色片把一幅真彩色图像分离为红、绿、蓝3幅图像。色光合成过程是把3幅红、绿、蓝图像恢复合成为原来真彩色图像。
+    
+    （1）密度分割法
+
+    把黑白图像的灰度级从0（黑）到M0（白）分成N个区间Ii(i=1，2，…，N),给每个区间Ii指定一种彩色Ci，这样，便可以把一幅灰度图像变成一幅伪彩色图像。该方法比较简单、直观。缺点是变换出的彩色数目有限。
+
+    （2）彩色变换法
+        
+    灰度级-彩色变换是一种更为常用的、比密度分割更有效的伪彩色增强法。根据色度学原理，将原灰度图像f(x,y)送入具有不同变换特性的红、绿、蓝三个变换器TR(•)、TG(•)和TB(•)，变成三基色分量IR(x,y)、IG(x,y)、IB(x,y)，然后用它们分别去控制彩色显示器的红、绿、蓝电子枪，便可以在彩色显示器的屏幕上合成一幅彩色图像。
+    
+    2.假彩色增强
+        
+    假彩色增强是对一幅自然彩色图像或同一景物的多光谱图像，通过映射函数变换成新的彩色图象。
+
+    目的：
+    
+    （1）使感兴趣目标呈现出与原图像中不同的、奇异的彩色。
+    
+    （2）适应人眼对颜色的灵敏度，提高鉴别能力。如人眼对绿色亮度响应最灵敏，可把细小物体映射成绿色。人眼对蓝光的强弱对比灵敏度最大。可把细节丰富的物体映射成深浅与亮度不一的蓝色。
+    
+    （3）遥感多光谱图象处理成假彩色，以获得更多信息。
+    
+    3.真彩色增强
+    
+    全彩色图像处理研究分为两大类。第一类是分别处理每一分量图像。然后，从分别处理过的分量图像形成合成彩色图像。第二类是直接对彩色像素处理。
+    
+    （1）彩色图像平滑
+    
+    彩色图像平滑是指通过一些滤波算法，使得图像中的噪声被消除，并且图像中的细节仍然能够保留。常用的彩色图像平滑方法包括：
+
+    [1]均值滤波：将每个像素周围一个固定大小的邻域内的像素值取平均数，来代替该像素的值；
+    
+    [2]中值滤波：将每个像素周围一个固定大小的邻域内的像素值进行排序，取中间值来代替该像素的值；
+    
+    [3]高斯滤波：利用高斯函数对像素周围的邻域进行加权平均，以达到平滑的效果。
+
+
+                <!-- </p>
+            </pre>
+            <div class="card-body">
+                <h4 class="h3 text-dark pt-3 pb-5" name="titles">高斯模糊</h4>
+                <h4 class="h3 text-dark pt-3 pb-5">请输入一张图像 如下：</h4>
+                <img src="/static/images/text.jpg" style="width: 250px;">
+                <div class="form-group">
+                    <label for="pic">
+                        <input type="file" name="pic" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic(this)" /></label>
+                </div>
+                <div class="container">
+                    <div id="display_none" style="left: 5%;position:absolute;"></div>
+                    <div id="display_none1" style="left: 65%;position:absolute;"></div>
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <pre>
+                <p style="font-size: large;">  -->
+                
+    （2）彩色图像中值滤波
+    
+    彩色图像中值滤波是一种基于排序统计学原理的图像降噪方法。它的主要思想是在一个局部窗口内，将所有像素的值按照大小顺序排列，然后用中间值来代替当前像素的值。对于彩色图像，可以分别对每个通道进行中值滤波，或者将RGB三个通道合并为灰度图像后再进行中值滤波。
+    
+    （3）彩色图像锐化
+        
+    彩色图像锐化是指对彩色图像进行增强处理，使其变得更加清晰、鲜明。这种处理可以突出图像的细节和边缘，以便更好地观察和分析图像。通常涉及去除噪声、边缘检测、锐化、亮度调整等步骤。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact23" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像退化与图像复原</h1>
+                <p style="font-size: large;"> 
+    成像及图像传输过程中的“退化“，是指由于成像及传输系统各种因素（成像系统的散焦、成像设备与物体的相对运动、成像器材的固有缺陷以及外部电磁干扰等）的影响，使得图像质量降低。与图像增强相似，图像复原的目的也是改善图像质量。图像复原技术可以使用空间域或频率域滤波器实现。
+    
+    图像的复原：根据事先建立起来的系统退化模型，将降质了的图像恢复成原来的图像，针对引起图像退化的原因，以及降质过程某先验知识，建立退化模型，再针对降质过程采取相反的方法，恢复图像。
+    
+    图像增强主要是一个主观过程，而图像复原主要是一个客观过程。图像增强被认为是一种对比度拉伸，提供给用户喜欢接收的图像；而图像复原技术追求恢复原始图像的最优估值。图像复原可以看作图像退化的逆过程，是将图像退化的过程加以估计，建立退化的数学模型后，补偿退化过程造成的失真。
+        
+    资料来源：<a href="https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792">https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792</a>
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact24" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像分割</h1>
+                <p style="font-size: large;"> 
+    图像分割(Image Segmentation)是把图像分成若干个有意义区域的处理技术。从本质上说是将各像素进行分类的过程。分类所依据的特性可以是像素的灰度值、颜色或多谱特性、空间特性和纹理特性等。图像分割按照图像的某些特性(如灰度级等)将图像分成若干区域,在每个区域内部有相同或者相近的特性,而相邻区域的特性不相同。一般假设在同一区域内特性的变化平缓,而在区域的边界上特性的变化剧烈。
+
+    1.图像处理过程
+
+    <img src="/static/images/图片23.png" class="img-fluid" alt="..">
+
+    对图像进行增强处理后，往往要将注意力集中在整幅图像的某个感兴趣(有意义)的区域，即通常称之为目标（object），而相对于目标的图像其他部分则称之为背景（background）。将目标和背景分离并从整个图像中提取出目标的处理过程称之为图像分割（segmentation）。图像分割是将数字图像划分成互不相交的区域的过程。同时也是一个标记过程，即把属于同一区域的像素赋予相同的编号。
+
+    <img src="/static/images/图片24.png" class="img-fluid" alt="..">
+
+    2.图像分割的基本策略
+                
+    （1）阈值分割：根据像素的灰度值设定一个或者多个阈值，将图像中灰度值高于或低于阈值的像素分到不同的区域。阈值分割适用于图像中具有明显灰度差异的目标对象，并且背景与目标对象的灰度值有明显差距。
+    
+    （2）区域生长法：通过选取合适的生长准则和种子点，实现自动地将图像中相邻的像素归类到相应的区域中。区域生长法适用于图像中存在连续性较好的目标对象，其中的像素具有一定的相似性。
+    
+    （3）边缘检测与边缘连接：利用图像中灰度值的变化来检测目标对象的边缘，并通过边缘连接的方式将边缘像素组成闭合的轮廓。边缘检测和边缘连接方法适用于检测不规则形状的目标对象。
+    
+    （4）基于图论的分割：将图像视为一个图，其中的像素作为图的节点，根据像素之间的相似性建立边。然后通过图论算法（如最小割、最大流等）将图像分割成多个子图，每个子图对应一个区域或对象。基于图论的分割适用于复杂场景中的目标检测和分割。
+    
+    （5）基于聚类的分割：将图像中的像素按照其特征值进行聚类，将相似的像素归到同一个区域。聚类算法可以是K均值聚类、谱聚类等。这种方法适用于图像中存在多个目标对象，并且背景与目标对象的灰度值差异不明显。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact25" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>二值图像形态学运算</h1>
+                <p style="font-size: large;"> 
+    二值形态学中的运算对象是集合。设X为图像集合,S为结构元素,数学形态学运算是用S对X进行操作。需要指出的是,实际上结构元素本身也是一个图像集合。对每个结构元素可以指定一个原点,它是结构元素参与形态学运算的参考点。应注意,原点可以包含在结构元素中,也可以不包含在结构元素中,但运算的结果常不相同。以下用阴影代表值为1的区域,用白色代表值为0的区域,运算是对值为1的区域进行的。
+    
+    1.腐蚀
+        
+    腐蚀是一种消除连通域的边界点，使边界向内收缩的处理。可以用来消除小且无意义的目标物。如果两目标物间有细小的连接，可以选取足够大的结构元素，将细小连接腐蚀掉。
+    
+    比如：
+
+    <img src="/static/images/图片25.png" class="img-fluid" alt="..">
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python13" aria-controls="python13">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python13">
+                <pre>
+                    <code>
+    import cv2
+    import numpy as np
+    img = cv2.imread("1.png",cv2.IMREAD_COLOR)
+    b, g, r = cv2.split(img)
+    img2 = cv2.merge([r, g, b])
+    rows, cols = img.shape[:2]
+    src = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, src = cv2.threshold(src, 102, 255, cv2.THRESH_BINARY)
+    kernel = np.ones((10, 10), np.uint8)
+    res1 = cv2.erode(src, kernel)
+    cv2.imwrite("2.png",res1) 
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab13" aria-controls="matlab13">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab13">
+                <pre>
+                    <code>
+    I=imread('1.png'); 
+    i=rgb2gray(I);
+    se=strel('ball',5,5);
+    i2=imerode(i, se);
+    subplot(1,2,1);
+    imshow(i);
+    title('原始图像') ;
+    subplot(1,2,2);
+    imshow(i2);
+    title('灰度图像腐蚀处理') ;
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">腐蚀</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic13">
+                        <input type="file" name="pic13" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic13(this)" multiple /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none26" style="float: left;width: 50%"></div>
+                    <div id="display_none27" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare13" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none26">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none27">
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <pre>
+                <p style="font-size: large;"> 
+
+    2.膨胀
+
+    膨胀是将与目标区域的背景点合并到该目标物中，使目标物边界向外部扩张的处理。 膨胀可以用来填补目标区域中存在的某些空洞，以及清除包含在目标区域中的小颗粒噪声。
+
+    <img src="/static/images/图片26.png" class="img-fluid" alt="..">
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python14" aria-controls="python14">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python14">
+                <pre>
+        <code>
+    import cv2
+    import numpy as np
+    img = cv2.imread("1.png",cv2.IMREAD_COLOR)
+    b, g, r = cv2.split(img)
+    img2 = cv2.merge([r, g, b])
+    rows, cols = img.shape[:2]
+    src = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, src = cv2.threshold(src, 102, 255, cv2.THRESH_BINARY)
+    kernel = np.ones((10, 10), np.uint8)
+    dilated = cv2.dilate(src, kernel)
+    cv2.imwrite("2.png",dilated) 
+        </code>
+    </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab14" aria-controls="matlab14">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab14">
+                <pre>
+        <code>
+    I=imread('1.png');
+    i=rgb2gray(I);
+    se=strel('ball',6,6);
+    i2=imdilate(i, se);
+    subplot(1,2,1);
+    imshow(i);
+    title('原始图像') ;
+    subplot(1,2,2);
+    imshow(i2);
+    title('膨胀处理后的图像')
+        </code>
+    </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">膨胀</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic14">
+                        <input type="file" name="pic14" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic14(this)" multiple /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none28" style="float: left;width: 50%"></div>
+                    <div id="display_none29" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare2" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none28">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none29">
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <pre>
+                <p style="font-size: large;"> 
+    3.开运算与闭运算
+    
+    腐蚀和膨胀运算的一个缺点是，改变了原目标物的大小。为解决这一问题，考虑到腐蚀与膨胀是一对逆运算，将膨胀与腐蚀运算同时进行。由此便构成了开运算与闭运算。一般可以利用函数imopen、imclose执行图像开运算和闭运算。
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python15" aria-controls="python15">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python15">
+                <pre>
+                    <code>
+    import cv2
+    import numpy as np
+    img = cv2.imread("1.png",cv2.IMREAD_COLOR)
+    b, g, r = cv2.split(img)
+    img2 = cv2.merge([r, g, b])
+    rows, cols = img.shape[:2]
+    src = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, src = cv2.threshold(src, 102, 255, cv2.THRESH_BINARY)
+    kernel = np.ones((10, 10), np.uint8)
+    opened = cv2.morphologyEx(src, cv2.MORPH_OPEN, kernel)
+    cv2.imwrite("2.png",opened) 
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab15" aria-controls="matlab15">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab15">
+                <pre>
+                    <code>
+    I=imread('1.jpg'); 
+    i=rgb2gray(I);
+    subplot(1,2,1);
+    imshow(i);
+    title('原始图像') ;
+    se=strel('disk',7);
+    i0=imopen(i, se);
+    subplot(1,2,2);
+    imshow(i0);
+    title('开运算') ;
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">开运算</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic15">
+                        <input type="file" name="pic15" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic15(this)" multiple /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none30" style="float: left;width: 50%"></div>
+                    <div id="display_none31" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare15" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none30">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none31">
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python13" aria-controls="python13">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python13">
+                <pre>
+                    <code>
+    import cv2
+    import numpy as np
+    img = cv2.imread("1.png",cv2.IMREAD_COLOR)
+    b, g, r = cv2.split(img)
+    img2 = cv2.merge([r, g, b])
+    rows, cols = img.shape[:2]
+    src = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, src = cv2.threshold(src, 102, 255, cv2.THRESH_BINARY)
+    kernel = np.ones((10, 10), np.uint8)
+    closed = cv2.morphologyEx(src, cv2.MORPH_CLOSE, kernel)
+    cv2.imwrite("2.png",closed) 
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab16" aria-controls="matlab16">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab16">
+                <pre>
+                    <code>
+    i=imread('1.jpg');
+    subplot(1,2,1);
+    imshow(i);
+    title('原始图像') ;
+    se=strel('disk',10);
+    bw=imclose(i, se);
+    subplot(1,2,2);
+    imshow(bw);
+    title('闭运算') ;
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">闭运算</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic16">
+                        <input type="file" name="pic16" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic16(this)" multiple /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none32" style="float: left;width: 50%"></div>
+                    <div id="display_none33" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare16" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none32">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none33">
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <pre>
+    <p style="font-size: large;"> 
+    4.二值图像连接成分
+    
+    在二值图像特征分析中最基础的概念是二值图像的连接性。二值图像连接成分是指在一副二值图像中，由相邻且具有相同像素值的像素组成的连通区域。这些连通区域可以表示出物体的形状和位置，对于医学图像处理与识别等领域的分析具有重要意义。
+
+    5、轮廓抽取与细线化
+
+    用下述算法可以很简单地抽取二值图像的轮廓线：
+    
+    （1）若中心像素值为0，不问其余8像素的值如何，一律保留中心像素值为0；
+    
+    （2）若中心像素值为1，且其余8个像素全为1，则改变中心像素值为0；
+    
+    （3）除此以外，全部将中心像素值设为1。
+
+    细线化方法：细线化能够实现从文本等图像信息中抽取骨架。细线化即从原来的图中去掉一些点，但仍要保持原来的形状，即保持原图的骨架。骨架可以理解为图像的轴线，例如一个长方形的骨架是它的长方向上的中轴线；正方形的骨架是它的中心点；圆的骨架是它的圆心，直线的骨架是它自身，孤立点的骨架也是自身。
+
+    资料来源：<a href="https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792">https://ai.zhihuishu.com/AIstudent/allMap/1653939158986657792</a>
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact26" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像的位置变化</h1>
+                <p style="font-size: large;"> 
+    1.图像的几何变换是指原始图像按照需要产生大小、形状和位置的变化。
+
+    2.不改变图像的像素值，而是改变像素所在的几何位置。
+
+    3.对于原图像f(x,y)，坐标变换函数x’=a(x,y);y’=b(x,y)。
+
+    4.唯一确定了几何变换：g(x’,y’)=f(a(x,y),b(x,y))[g(x,y)是目标图像。
+
+    5.图像是矩阵，图像的几何变换用矩阵运算来实现。P’=TP。
+
+    6.在数字图像处理中，几何变换由两个基本操作组成：
+
+    （1）坐标的空间变换：坐标变换可由下式表示：（x,y）=T{(v,w)}；其中，(v,w)是原图像中像素的坐标，(x,y)是变换后图像中像素的坐标。
+
+    （2）灰度内插：即对空间变换后的像素赋灰度值。
+
+    7.平移：
+
+    坐标变换函数：
+
+    <img src="/static/images/图片27.png" class="img-fluid" alt="..">
+
+    矩阵形式：
+
+    <img src="/static/images/图片28.png" class="img-fluid" alt="..">
+
+    8.缩放：
+
+    （1）变换矩阵：图像的几何变换改变了像素的空间位置，建立一种原图像像素与变换后图像像素之间的映射关系，通过这种映射关系能够实现下面两种计算：
+
+    向前映射：原图像任意像素计算该像素在变换后图像的坐标位置。
+
+    向后映射：换后图像的任意像素在原图像的坐标位置。
+    
+    （2）插值
+
+    最近邻插值：赋予点(x,y)在像素矩阵中离它最近的点的像素值。最近邻插值的定位误差最大是半个像素。这种误差在物体具有直线边界时就会显现出来，在变换后可能会呈现阶梯状。
+
+    双线性插值：当求出的分数地址与像素点不一致时，求出周围四个像素点的距离比，根据该比率，由四个邻域的像素灰度值进行线性插值。
+
+    9.旋转：
+        
+    一般图像的旋转是以图像的中心为原点，将图像上的所有像素都旋转一个相同的角度。图像的旋转变换是图像的位置变换，但旋转后，图像的大小一般会改变。图像旋转变换后，既可以把转出显示区域的图像截去，也可以扩大图像范围以显示所有的图像。
+
+    10.镜像：
+    
+    水平镜像操作是将图像左半部分和右半部分以图像垂直中轴线为中心进行镜像对换。垂直镜像操作是将图片上半部分和下半部分以图像水平中轴线为中心进行镜像对换。
+    
+    11.复合变换：
+    
+    图像的复合变换是指对给定的图像连续施行若干次如前所述的平移、镜像、比例缩放、旋转等基本操作后所完成的变换，图像的复合变换又叫级联变换。
+    
+    利用齐次坐标，对给定的图像依次按一定顺序连续施行若干次基本变换，其变换的矩阵仍可以用3×3阶的矩阵表示。复合变换的矩阵等于基本变换的矩阵按顺序依次相乘得到的组合矩阵。设对给定的图像依次进行了基本变换F1，F2，…，FN，他们的变换矩阵分别为T1，T2，…，TN，按照几何变换公式的表示形式，图像复合变换的矩阵T可以表示为：T=TN TN-1…T1。
+                </p>
+            </pre>
+            <pre>
+                <p style="font-size: large;">
+    版权声明：本文为llurran原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+    本文链接：<a href="https://blog.csdn.net/weixin_45847073/article/details/120705806">https://blog.csdn.net/weixin_45847073/article/details/120705806</a>
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact27" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像的形状变化</h1>
+                <p style="font-size: large;"> 
+    通常情况下，形状特征有两类表示方法，一类是轮廓特征，另一类是区域特征。图像的轮廓特征主要针对物体的外边界，而图像的区域特征则关系到整个形状区域。
+
+    （1）梯度方向直方图（HOG）
+
+    该方法通过对边界特征的描述来获取图像的形状参数。其中Hough 变换检测平行直线方法和边界方向直方图方法是经典方法。Hough 变换是利用图像全局特性而将边缘像素连接起来组成区域封闭边界的一种方法，其基本思想是点-线的对偶性；边界方向直方图法首先微分图像求得图像边缘，然后，做出关于边缘大小和方向的直方图，通常的方法是构造图像灰度梯度方向矩阵。
+
+    （2）傅里叶形状描述符法
+    
+    傅里叶形状描述符(Fourier shape descriptors)基本思想是用物体边界的傅里叶变换作为形状描述，利用区域边界的封闭性和周期性，将二维问题转化为一维问题。
+    
+    由边界点导出三种形状表达，分别是曲率函数、质心距离、复坐标函数。
+    
+    （3）几何参数法
+    
+    形状的表达和匹配采用更为简单的区域特征描述方法，例如采用有关形状定量测度（如矩、面积、周长等）的形状参数法（shape factor）。在 QBIC 系统中，便是利用圆度、偏心率、主轴方向和代数不变矩等几何参数，进行基于形状特征的图像检索。
+        
+    需要说明的是，形状参数的提取，必须以图像处理及图像分割为前提，参数的准确性必然受到分割效果的影响，对分割效果很差的图像，形状参数甚至无法提取。
+    
+    （4）形状不变矩法
+    
+    利用目标所占区域的矩作为形状描述参数。
+    
+    （5）其它方法
+        
+    近年来，在形状的表示和匹配方面的工作还包括有限元法（Finite Element Method 或FEM）、旋转函数（Turning Function）和小波描述符（Wavelet Descriptor）等方法。
+                </p>
+            </pre>
+            <pre>
+                <p style="font-size: large;">
+    版权声明：本文为SongpingWang原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+    本文链接：<a href="https://blog.csdn.net/wsp_1138886114/article/details/119561829">https://blog.csdn.net/wsp_1138886114/article/details/119561829</a>
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact28" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像的仿射变换</h1>
+                <p style="font-size: large;"> 
+    仿射变换是指图像可以通过一系列的几何变换来实现平移、旋转等多种操作。该变换能够保持图像的平直性和平行性。平直性是指图像经过仿射变换后，直线仍然是直线；平行性是指图像在完成仿射变换后，平行线仍然是平行线。
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python11" aria-controls="python11">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python11">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab10" aria-controls="matlab10">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab10">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text.jpg"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">仿射变换</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic10">
+                        <input type="file" name="pic10" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic10(this)" /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none20" style="float: left;width: 50%"></div>
+                    <div id="display_none21" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare10" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none20">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none21">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact29" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>压缩的概念</h1>
+                <p style="font-size: large;"> 
+    1.图像压缩是一种减少描绘一幅图像所需数据量的技术核科学，是数字图像处理领域中最有用也是商业上最成功的技术之一
+    
+    2.数据压缩是指减少表示给定信息量所需数据量的处理。在这种定义中，数据和信息是不相同的事情，数据是信息传递的手段，相同数据的信息可以由不同数量的数据表示，包含不相关或重复信息的表示就被称为冗余数据。令b和代表相同信息的两种表示中的比特数，b比特表示的相对数据冗余就是：R=R-1/C；C=b/b’（c为压缩率）
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact30" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>三种数据冗余类型</h1>
+                <p style="font-size: large;"> 
+    1.编码冗余：(编码是用于表示信息实体或事件集合的符号系统(字母、数字、比特和类似的符号等)。每个信息或事件被赋予一个编码符号的序列，称之为码字。每个码字中的符号数量就是该码字的长度。在多数二维灰度阵列中，用于表示灰度的8比特编码所包含的比特数要比表示该灰度所需要的比特数多。
+
+    2.空间和时间冗余：因为多数二维灰度阵列的像素是空间相关的(即每一个像素类似于或取决于相邻像素)，在相关像素的表示中，信息被没有必要地重复了.在视频序列中，时间相关的像素(即类似于或取决于相邻帧中的那些像素)也是重复的信息。
+
+    3.不相关的信息：多数二维灰度阵列中包含有一些被人类视觉系统忽略或与用途无关的信息。从没有被利用的意义上看，它是冗余的。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact31" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像压缩模型</h1>
+                <p style="font-size: large;"> 
+
+    <img src="/static/images/图片29.png" class="img-fluid" alt="..">
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python8" aria-controls="python8">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python8">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab8" aria-controls="matlab8">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab8">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/shuzi6.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">图像压缩</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic8">
+                        <input type="file" name="pic8" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic8(this)" /></label>
+                </div>
+                <div class="container" style="width: 100%;">
+                    <div id="display_none18" style="float: left;width: 50%"></div>
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python9" aria-controls="python9">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python9">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab9" aria-controls="matlab9">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab9">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <pre>
+                            <p>iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAAAAABXZoBIAAAAsUlEQVQoU2P8z4AbMOGRY2BBkvy09qxLAIri/whwW4U3GIn7/z+yzp93GO+gaES18/8fPJJorkNz7b/vyPLIkkwcTH+P45Lktvr/+TIuSV67/5+v4NRpyvAdpySrNMPfz7h0MrJxMPx6iiSL4hU2eYY/r3BJMvMyoIQR3iijniRK4KIYyyzE8PUYLteyqzB8PY1Lks9TRUADSZIROWn+/3Tmp5oKQhZFEj2ZUs+fKCYDAHLoQosvVBQXAAAAAElFTkSuQmCC
+                            </p>
+                        </pre>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">图像解压</h4>
+                        <p class="card-text">请输入压缩文件 内容如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="file" name="pic9" class="btn btn-block btn-lg bg-white mt-4"
+                        onchange="post_pic9(this)" />
+                </div>
+                <div class="container" style="width: 100%;">
+                    <div id="display_none19" style="float: left;width: 50%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact32" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>处理过程</h1>
+                <p style="font-size: large;">
+    1.编码或压缩过程
+
+    上图编码器被设计成通过一系列三个独立操作去除冗余度的形式，在编码处理的第一个阶段，映射器把输入变换为设计来减低空间和时间冗余的形式，这个是一个可逆操作。量化器会根据预设的保真度准则来降低映射器输出的精度，以排除压缩表示的无关信息、这个操作是不可逆的，若想进行无误差的压缩，这一步必须要省略。信源编码是最后阶段是利用符号编码器生成一个定长编码或变长编码来表示量化器的输出。并根据该编码来变换输出。
+
+    2.解码或解压缩过程：
+
+    解码器仅包含两个部分，符号解码器和反映射器，以与编码器相反的顺序排放，执行相关操作。由于量化会导致不可逆的信息损失，因此反量化器模块并不存在于通常的解码器模型里。
+
+    3.一些基本的压缩方法：
+
+    （1）霍夫曼编码：在单独的对信源符号进行编码时，每个信源符号产生的是可能最小数量的编码符号。下图为霍夫曼信源化简及编码分配过程：
+
+    <img src="/static/images/图片30.png" class="img-fluid" alt="..">
+
+    <img src="/static/images/图片31.png" class="img-fluid" alt="..">
+
+    （2）Golomb
+
+    是一种具有指数衰减概率分布输入的非负的整数编码，这种编码是计算上比霍夫曼编码还要简单的一类编码。表示小于等于x的最大整数，表示大于等于x的最小整数，x mod y表示x被y除的余数。Golomb编码的构建如下：
+
+    步骤一：形成商的一元编码
+
+    步骤二：令k=，c=-m，r = n mod m，计算截短的余数，使其满足：
+
+    步骤三：连接步骤一和步骤二的结果
+                </p>
+            </pre>
+            <pre>
+                <p style="font-size: large;">
+    版权声明：本文为jgq1466693原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+    本文链接：<a href="https://blog.csdn.net/jgq1466693/article/details/125633783">https://blog.csdn.net/jgq1466693/article/details/125633783</a>
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact33" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像特征</h1>
+                <p style="font-size: large;">
+    1.几何特征（位置与方向、周长、面积、长轴与短轴、距离(欧式距离、曼哈顿距离、切比雪夫距离、余弦距离)）；
+
+    2.形状特征（几何形态分析（Blob分析）：矩形度、圆形度、不变矩、偏心率、多边形描述、曲线描述）；
+
+    3.幅值特征（矩、投影）；
+
+    4.直方图特征（统计特征）：均值、方差、能量、熵、L1范数、L2范数等；直方图特征方法计算简单、具有平移和旋转不变性、对颜色像素的精确空间分布不敏感等，在表面检测、缺陷识别有不少应用。
+
+    5.颜色特征（颜色直方图、颜色矩）:
+
+    6.局部二值模式(LBP)特征：LBP对诸如光照变化等造成的图像灰度变化具有较强的鲁棒性，在表面缺陷检测、指纹识别、光学字符识别、人脸识别及车牌识别等领域有所应用。由于LBP计算简单，也可以用于实时检测
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact34" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像特征提取算法——HOG特征</h1>
+                <p style="font-size: large;">
+    1.方向梯度直方图（Histogram of Oriented Gradient, HOG）特征是一种在计算机视觉和图像处理中用来进行物体检测的特征描述子。它通过计算和统计图像局部区域的梯度方向直方图来构成特征。Hog特征结合SVM分类器已经被广泛应用于图像识别中，尤其在行人检测中获得了极大的成功。需要提醒的是，HOG+SVM进行行人检测的方法是法国研究人员Dalal在2005的CVPR上提出的，而如今虽然有很多行人检测算法不断提出，但基本都是以HOG+SVM的思路为主。 
+    
+    2.实现过程
+
+    （1）灰度化（将图像看做一个x,y,z（灰度）的三维图像）；
+
+    （2）采用Gamma校正法对输入图像进行颜色空间的标准化（归一化）；目的是调节图像的对比度,降低图像局部的阴影和光照变化所造成的影响，同时可以抑制噪音的干扰；
+    
+    （3）计算图像每个像素的梯度（包括大小和方向）；主要是为了捕获轮廓信息，同时进一步弱化光照的干扰。
+    
+    （4）将图像划分成小cells（例如6*6像素/cell）；
+    
+    （5）统计每个cell的梯度直方图（不同梯度的个数），即可形成每个cell的descriptor；
+    
+    （6）将每几个cell组成一个block（例如3*3个cell/block），一个block内所有cell的特征descriptor串联起来便得到该block的HOG特征descriptor。
+    
+    （7）将图像image内的所有block的HOG特征descriptor串联起来就可以得到该image（你要检测的目标）的HOG特征descriptor了。这个就是最终的可供分类使用的特征向量了。
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python11" aria-controls="python11">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python11">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab11" aria-controls="matlab11">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab11">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">HOG特征提取</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic11">
+                        <input type="file" name="pic11" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic11(this)" multiple /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none22" style="float: left;width: 50%"></div>
+                    <div id="display_none23" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare11" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none22">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none23">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact35" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像特征提取算法——LBP特征</h1>
+                <p style="font-size: large;">
+    1.LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局部纹理特征的算子；它具有旋转不变性和灰度不变性等显著的优点。它是首先由T. Ojala, M.Pietikäinen, 和D. Harwood 在1994年提出，用于纹理特征提取。而且，提取的特征是图像的局部的纹理特征。
+    
+    2.实现过程：
+    
+    （1）首先将检测窗口划分为16×16的小区域（cell）
+   
+    （2）对于每个cell中的一个像素，将相邻的8个像素的灰度值与其进行比较，若周围像素值大于中心像素值，则该像素点的位置被标记为1，否则为0。这样，3*3邻域内的8个点经比较可产生8位二进制数，即得到该窗口中心像素点的LBP值；
+    
+    （3）然后计算每个cell的直方图，即每个数字（假定是十进制数LBP值）出现的频率；然后对该直方图进行归一化处理。
+    
+    （4）最后将得到的每个cell的统计直方图进行连接成为一个特征向量，也就是整幅图的LBP纹理特征向量；
+
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python12" aria-controls="python12">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python12">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab12" aria-controls="matlab12">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab12">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">LBP特征提取</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic12">
+                        <input type="file" name="pic12" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic12(this)" multiple /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none24" style="float: left;width: 50%"></div>
+                    <div id="display_none25" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare12" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none24">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none25">
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact36" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像特征提取算法——Haar特征</h1>
+                <p style="font-size: large;">
+    1.Haar特征分为三类：边缘特征、线性特征、中心特征和对角线特征，组合成特征模板。特征模板内有白色和黑色两种矩形，并定义该模板的特征值为白色矩形像素和减去黑色矩形像素和。Haar特征值反映了图像的灰度变化情况。例如：脸部的一些特征能由矩形特征简单的描述，如：眼睛要比脸颊颜色要深，鼻梁两侧比鼻梁颜色要深，嘴巴比周围颜色要深等。但矩形特征只对一些简单的图形结构，如边缘、线段较敏感，所以只能描述特定走向（水平、垂直、对角）的结构。
+    
+    2.实现过程
+    
+    （1）用s(i,j)表示行方向的累加和，初始化s(i,-1)=0;
+    
+    （2）用ii(i,j)表示一个积分图像，初始化ii(-1,i)=0；
+    
+    （3）逐行扫描图像，递归计算每个像素(i,j)行方向的累加和s(i,j)和积分图像ii(i,j)的值
+    
+    s(i,j)=s(i,j-1)+f(i,j)
+    
+    ii(i,j)=ii(i-1,j)+s(i,j)
+    
+    （4）扫描图像一遍，当到达图像右下角像素时，积分图像ii就构造好了。
+                </p>
+            </pre>
+            <pre>
+                <p style="font-size: large;">
+    版权声明：本文为yishuihan-Oliver原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+    本文链接：<a href="https://blog.csdn.net/yishuihanq/article/details/116423034">https://blog.csdn.net/yishuihanq/article/details/116423034</a>
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact37" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像配准的概念</h1>
+                <p style="font-size: large;">
+    1.图像配准是使用某种方法，基于某种评估标准，将一副或多副图片（局部）最优映射到目标图片上的方法。
+
+    2.对于一组图像数据集中的两幅图像，通过寻找一种空间变换把一幅图像映射到另一幅图像，使得两图中对应于空间同一位置的点一一对应起来，从而达到信息融合的目的。
+
+    3.图像配准是使用某种方法，基于某种评估标准，将一副或多副图片（局部）最优映射到目标图片上的方法。通常情况下，它将一副图片（源图像，Moving Image）的坐标映射到另一幅图像（目标图像，Fixed Image）上，得到配准后的图像对（Moved Image）。
+
+    4.在做医学图像分析时,经常要将同一患者几幅图像放在一起分析,从而得到该患者的多方面的综合信息,提高医学诊断和治疗的水平。对几幅不同的图像作定量分析,首先要解决这几幅图像的严格对齐问题,这就是我们所说的图像的配准。医学图像配准是指对于一幅医学图像寻求一种(或一系列)空间变换,使它与另一幅医学图像上的对应点达到空间上的一致。这种一致是指人体上的同一解剖点在两张匹配图像上有相同的空间位置。配准的结果应使两幅图像上所有的解剖点,或至少是所有具有诊断意义的点及手术感兴趣的点都达到匹配。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact38" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>配准的分类</h1>
+                <p style="font-size: large;">
+    1.根据图像采集方式分：
+
+    Multi-view Analysis（多视图配准）：同一物体在同一场景不同视角下的图像配准。如图像蒙太奇（拼贴），从2D图像重建3D模型等。
+        
+    Multi-temporal Analysis（多时相配准）：同一物体在同一场景同视角不同时间的图像配准。如运动追踪，肿瘤生长情况跟踪等。
+
+    Multi-modal Analysis（多模配准）：由于医学成像设备可以提供关于患者不同信息不同形式的图像（计算机断层扫描CT，核磁共振MRI，正电子发射断层成像PET，功能核磁共振fMRI等），所以根据模态又可以划分为单模态和多模态（Multi-modal）。
+
+    2.按配准主体分：
+
+    以医学图像配准为例，可分为Intrasubject（图像来自于同一病人），Intersubjective（来自不同的病人）和Atlas（病人数据和图谱的配准）三种。
+
+    3.按配准的器官：
+
+    配准物体（头、胸、腹、膝盖）
+
+    4.按图像转换区域
+
+    分为全局/局部配准。
+
+    5.按变换性质
+
+    它可以是刚性的（平移，旋转，反射），仿射变换（平移，旋转，缩放，反射，剪切），投影变换或曲线变换。
+
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact39" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>流程</h1>
+                <p style="font-size: large;">
+    1.根据实际应用场合选取适当的变换模型；
+
+    2.选取合适的特征空间，或者是基于灰度的或者是基于特征的；
+
+    3.根据变换模型的参数配置以及所选用的特征，确定参数可能变化的范围，并选用最优的搜索策略；
+
+    4.应用相似性测度在搜索空间中按照优化准则进行搜索，寻找最大相关点，从而求解出变换模型中的未知参数；
+
+    5.将待配准图像按照变换模型逐像素一一对应到参考图像中，实现图像间的匹配。
+                </p>
+            </pre>
+            <pre>
+                <p style="font-size: large;">
+    版权声明：本文为117瓶果粒橙原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+    本文链接：<a href="https://blog.csdn.net/weixin_41513917/article/details/103450312">https://blog.csdn.net/weixin_41513917/article/details/103450312</a>
+                </p>
+            </pre>
+        </div>
+        <div class="tab-pane fade" id="contact40" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像分割</h1>
+                <p style="font-size: large;">
+    由于人体的组织器官不均匀、器官蠕动等造成医学图像一般具有噪声、病变组织边缘模糊等特点,医学图像分割技术的目的就是将图像中感兴趣的区域清楚的提取出来,这样就能为后续的定量、定性分析提供图像基础,同时它也是三维可视化的基础。现在有的图像分割方法有如下几种：基于阈值的分割方法、基于区域的分割方法、基于边缘的分割方法以及基于特定理论的分割方法等。
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python6" aria-controls="python6">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python6">
+                <pre>
+                    <code>
+    import cv2
+    import numpy as np
+    image = cv2.imread(("1.png"), cv2.IMREAD_GRAYSCALE)
+    ratio=0.15
+    I_mean = cv2.boxFilter(image, cv2.CV_32FC1, (5, 5))
+    out = image - (1.0 - ratio) * I_mean
+    out[out >= 0] = 255
+    out[out < 0] = 0
+    out = out.astype(np.uint8)
+    cv2.imwrite(("2.png"),out)
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab6" aria-controls="matlab6">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab6">
+                <pre>
+                    <code>
+    I = imread('1.png'); 
+    T3=graythresh(I)
+    BW2=imbinarize(I,T3);
+    subplot(1,3,3);imshow(BW2);title('Otus阈值分割');
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text.jpg"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">自适应阈值分割</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic6">
+                        <input type="file" name="pic6" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic6(this)" /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none14" style="float: left;width: 50%"></div>
+                    <div id="display_none15" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare6" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none14">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none15">
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+        </div>
+        <div class="tab-pane fade container" id="contact41" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>图像配准和图像融合</h1>
+                <p style="font-size: large;">
+    医学图像配准是指对于一幅医学图像通过一种或一系列的空间变换,使它与另一幅医学图像上的对应点达到空间上的一致。配准的结果应使两幅图像上所有的解剖点,或至少是所有具有诊断意义的点及手术感兴趣的点都达到匹配，配准处理一般可以分为图像变换和图像定位两种。
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python3" aria-controls="python3">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python3">
+                <pre>
+                    <code>
+    import cv2
+    import numpy as np
+    from PIL import Image
+    image1 = Image.open("1.png")
+    image2 = Image.open("2.png")
+    img1 = cv2.cvtColor(np.asarray(image1), cv2.COLOR_BGR2GRAY)
+    img2 = cv2.cvtColor(np.asarray(image2), cv2.COLOR_BGR2GRAY)
+    height, width = img2.shape
+    orb = cv2.ORB_create(5000)
+    kp1, des1 = orb.detectAndCompute(img1,None)
+    kp2, des2 = orb.detectAndCompute(img2,None)
+    bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+    matches = bf.match(des1,des2)
+    matches = sorted(matches, key = lambda x:x.distance)
+    matches = matches[:int(len(matches)*0.9)]
+    no_of_matches = len(matches)
+    p1 = np.zeros((no_of_matches, 2))
+    p2 = np.zeros((no_of_matches, 2))
+    for i in range(len(matches)):
+        p1[i, :] = kp1[matches[i].queryIdx].pt
+        p2[i, :] = kp2[matches[i].trainIdx].pt
+    homography, mask = cv2.findHomography(p1, p2, cv2.RANSAC)
+    transformed_img = cv2.warpPerspective(img1,homography, (width, height))
+    cv2.imwrite("3.png", transformed_img)
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab3" aria-controls="matlab3">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab3">
+                <pre>
+                    <code>
+    img1 = rgb2gray(imread("1.png")); 
+    img2 = rgb2gray(imread("2.png")); 
+    img1_denoised = medfilt2(img1);  
+    img2_denoised = medfilt2(img2);  
+    img1_equalized = histeq(img1_denoised);  
+    img2_equalized = histeq(img2_denoised);  
+    features1 = detectSURFFeatures(img1_equalized);  
+    features2 = detectSURFFeatures(img2_equalized);  
+    [f1, valid_points1] = extractFeatures(img1_equalized, features1);  
+    [f2, valid_points2] = extractFeatures(img2_equalized, features2);  
+    indexPairs = matchFeatures(f1, f2);  
+    matchedPoints1 = valid_points1(indexPairs(:, 1), :);  
+    matchedPoints2 = valid_points2(indexPairs(:, 2), :);  
+    tform = estimateGeometricTransform(matchedPoints1, matchedPoints2, 'affine'); 
+    img2_aligned = imwarp(img1, tform, 'OutputView', imref2d(size(img2))); 
+    imshow(img2_aligned); 
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 60%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text3.png"
+                            style="float: left;width: 50%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text4.png"
+                            style="float: right;width: 50%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">图像配准</h4>
+                        <p class="card-text">请输入两张彩色图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic3">
+                        <input type="file" name="pic3" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic3(this)" multiple /></label>
+                </div>
+                <div class="container" style="width: 100%;">
+                    <div id="display_none6" style="float: left;width: 33%"></div>
+                    <div id="display_none7" style="float: left;width: 33%"></div>
+                    <div id="display_none8" style="float: left;width: 33%"></div>
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <pre>
+                <p style="font-size: large;">
+    医学图像在空间域配准之后,就可以进行图像融合,融合图像的创建又分为图像数据的融合与融合图像的显示两部分来完成。图像融合的目的是通过综合处理应用这些成像设备所得信息以获得新的有助于临床诊断的信息。利用可视化软件，对多种模态的图像进行图像融合，可以准确地确定病变体的空间位置、大小、几何形状及它与周围生物组织之间的空间关系，从而及时高效地诊断疾病，也可以用在手术计划的制定、病理变化的跟踪、治疗效果的评价等方面。
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python4" aria-controls="python4">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python4">
+                <pre>
+                    <code>
+    from PIL import Image
+    image1 = Image.open("1.png")
+    image1 = image.resize((400,400)) 
+    image2 = Image.open("2.png")
+    image2 = image2.resize((400,400)) 
+    image1 = image1.convert('RGBA')
+    image2 = image2.convert('RGBA')
+    X= Image.blend(image1,image2,0.5)
+    X.save("3.png")
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab4" aria-controls="matlab4">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab4">
+                <pre>
+                    <code>
+    img1 = imread('1.png');
+    img2 = imread('2.png');
+    result = imfuse(img1, img2, 'blend');
+    imshow(result);
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 60%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text1.png"
+                            style="float: left;width: 50%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text2.png"
+                            style="float: right;width: 50%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">图像融合</h4>
+                        <p class="card-text">请输入两张彩色图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic4">
+                        <input type="file" name="pic4" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic4(this)" multiple /></label>
+                </div>
+                <div class="container" style="width: 100%;">
+                    <div id="display_none9" style="float: left;width: 33%"></div>
+                    <div id="display_none10" style="float: left;width: 33%"></div>
+                    <div id="display_none11" style="float: left;width: 33%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="contact42" role="tabpanel" aria-labelledby="contact-tab">
+            <pre>
+                <h1>伪彩色处理技术</h1>
+                <p style="font-size: large;">
+    伪彩色图像处理技术是将黑白图像经过处理变为彩色图像,可以充分发挥人眼对彩色的视觉能力,从而使观察者能从图像中取得更多的信息。经过伪彩色处理技术,提高了对图像特征的识别。临床研究对CT、MRI、B超和电镜等图片均进行了伪彩色技术的尝试,取得了良好的效果,部分图片经过处理后可以显现隐性病灶。             
+                </p>
+            </pre>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#python5" aria-controls="python5">python实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="python5">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 1px;"></div>
+            <button class="collapsed btn btn-block btn-lg bg-white mt-4" type="button" aria-expanded="false"
+                data-bs-toggle="collapse" data-bs-target="#matlab5" aria-controls="matlab5">matlab实现
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-body-text" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M0 .5A.5.5 0 0 1 .5 0h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 0 .5Zm0 2A.5.5 0 0 1 .5 2h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm9 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-9 2A.5.5 0 0 1 .5 4h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm5 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Zm-12 2A.5.5 0 0 1 .5 6h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm8 0a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm-8 2A.5.5 0 0 1 .5 8h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm7 0a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5Zm-7 2a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Z" />
+                </svg>
+            </button>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="matlab5">
+                <pre>
+                    <code>
+
+                    </code>
+                </pre>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="container">
+                <div class="card" style="width: 30%">
+                    <div style="width: 100%;">
+                        <img class="card-img-top img-fluid" src="/static/images/text.jpg"
+                            style="float: left;width: 100%;">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">伪彩色处理</h4>
+                        <p class="card-text">请输入一张图像 如上</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="pic5">
+                        <input type="file" name="pic5" class="btn btn-block btn-lg bg-white mt-4"
+                            id="exampleFormControlFile1" onchange="post_pic5(this)" /></label>
+                </div>
+                <!-- <div class="container" style="width: 100%;">
+                    <div id="display_none12" style="float: left;width: 50%"></div>
+                    <div id="display_none13" style="float: left;width: 50%"></div>
+                </div> -->
+                <div id="image-compare5" style="width:50vh ;">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none12">
+                    <img src='' style="height: 66vh;width: 50vh;display: none;" id="display_none13">
+                </div>
+            </div>
+            <div style="height: 250px;"></div>
+            <pre>
+                <p style="font-size: large;">
+    版权声明：本文为2017200602037 徐冰砚原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+    本文链接：<a href="https://blog.csdn.net/weixin_43789163/article/details/84449729">https://blog.csdn.net/weixin_43789163/article/details/84449729</a>
+                </p>
+            </pre>
+        </div>
+        <div style="height: 400px;"></div>
+        <div>
+            <fieldset class="layui-elem-field layui-field-title" style="background-color: aliceblue;">
+                <legend>发表评论</legend>
+                <input type="hidden" id="tieba_id" name="tiebaId" value="0">
+                <textarea id="editor" lay-verify="content" class="layui-textarea" name="text"></textarea>
+                <button type="button" class="layui-btn comSub">提交评论</button>
+            </fieldset>
+            <hr style="margin-top: 30px; margin-bottom: 20px;">
+            <div style="text-align: center;">
+                <button class="navbar-light navbar-toggler collapsed btn btn-primary" type="button"
+                    aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#navbarsDefault1"
+                    aria-controls="navbarsDefault1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8Zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0Zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793Z" />
+                    </svg>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse offcanvas-collapse" id="navbarsDefault1">
+                <ul class="comment">
+                    {% for com in comment|reverse %}
+                    <li class="bg-white mt-4" style="border: 1px solid black;">
+                        <p class="myText">{{ com.text }}</p>
+                        <p>评论人：{{ com.user }} &nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{ com.create_time }}</p>
+                    </li>
+                    {% else %}
+                    <li>期待你的评论</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let editor;
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            licenseKey: '',
+            language: 'en',
+        })
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    $(function () {
+        $(".myText").each(function () {
+            $(this).html($(this).text());
+        });
+    })
+    function insertStr(str, index, insertStr) {
+            return str.substring(0, index) + insertStr + str.substring(index)
+        }
+    layui.use(['form'], function () {
+        var form = layui.form;
+        $(".comSub").click(function () {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                //获取评论内容
+                var text = editor.getData();
+                var tiebaId = $("#tieba_id").val();
+                if (text == "" || text == undefined) {
+                    layer.msg("评论不能为空哦！", { icon: 0 });
+                } else {
+                    var temp = text.indexOf("<img style=");
+                        while (temp != -1) {
+                            text = insertStr(text, temp + 11, "height:200px;width:200px;");
+                            temp = text.indexOf("<img style=",temp+11);
+                        }
+                    $.post("/tieba/comment", { text: text, tiebaId: tiebaId }, function (result) {
+                        if (result.success) {
+                            window.location.href = '/imageprocessing';
+                        }
+                    })
+                }
+            });
+        })
+    });
+</script>
+{% endblock %}
